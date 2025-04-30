@@ -203,6 +203,9 @@ public class Uicontroller : MonoBehaviour
         return menuIndex;
     }
 
+    public void UpdateMaxIndex(int a)
+    {
+        maxIndex = a;
+    }
 
-    
 }

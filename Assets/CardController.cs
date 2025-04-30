@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using System.Linq;
 public class CardController : MonoBehaviour
 {
     public static CardController Instance;
@@ -42,6 +43,7 @@ public class CardController : MonoBehaviour
         CurrentSelectionIndex = Index;
         CurrentSubSelectionIndex = 0;
         maxCurrentSubSelectionIndex = AllCardsAndThemes[CurrentSelectionIndex].CardDetails.Count-1;
+        FindAnyObjectByType<Uicontroller>().UpdateMaxIndex(AllCardsAndThemes[CurrentSelectionIndex].CardDetails.Count);
         for(int i=0;i<AllCardsAndThemes[Index].CardDetails.Count ; i++)
         {
             SelectedCards.Add(AllCardsAndThemes[Index].CardDetails[i]);

@@ -135,7 +135,7 @@
                     "name": "SecondaryButton",
                     "type": "Button",
                     "id": "1414e4ef-05d7-40b1-b759-aa2c2c9cee56",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false

@@ -14,6 +14,9 @@ public class ControllerJoystickEvents : MonoBehaviour
     public InputActionProperty leftJoystickActionForTrigger;
     public InputActionProperty rightJoystickActionForTrigger;
 
+    public InputActionProperty BackButtonAction;
+
+
     [Header("LeftControllerEvents")]
     public UnityEvent onJoystickLeftLeft; // For left joystick moving left
     public UnityEvent onJoystickLeftRight;
@@ -22,6 +25,8 @@ public class ControllerJoystickEvents : MonoBehaviour
     [Header("LeftControllerEvents")]
     public UnityEvent onJoystickRightLeft; // For right joystick moving left
     public UnityEvent onJoystickRightRight; // For right joystick moving right
+
+    public UnityEvent OnBackButtonPressed; 
 
     [Header("Thresholds")]
     public float triggerThreshold = 0.5f; // How far to move the joystick to trigger the event
@@ -35,11 +40,21 @@ public class ControllerJoystickEvents : MonoBehaviour
     {
         leftJoystickActionForTrigger.action.performed += ((arg0) => { onTriggerPressed?.Invoke(); });
         rightJoystickActionForTrigger.action.performed += ((arg0) => { onTriggerPressed?.Invoke(); });
+
+        if (BackButtonAction != null)
+        {
+            BackButtonAction.action.performed += ((arg0) => { OnBackButtonPressed?.Invoke(); });
+        }
     }
     private void OnDisable()
     {
         leftJoystickActionForTrigger.action.performed -= ((arg0) => { onTriggerPressed?.Invoke(); });
         rightJoystickActionForTrigger.action.performed -= ((arg0) => { onTriggerPressed?.Invoke(); });
+
+        if (BackButtonAction != null)
+        {
+            BackButtonAction.action.performed -= ((arg0) => { OnBackButtonPressed?.Invoke(); });
+        }
     }
     private void Start()
     {
@@ -92,7 +107,7 @@ public class ControllerJoystickEvents : MonoBehaviour
 
             }*/
         }
-
+        
     }
     [ContextMenu("JoystickRight")]
     public void JoystickRight()
