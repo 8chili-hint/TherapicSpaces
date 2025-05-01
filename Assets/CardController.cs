@@ -240,7 +240,7 @@ public class CardController : MonoBehaviour
 
         envsToLoad.Add((prevSelIndex, prevSubIndex));
 
-        // Step 2: Return all current active environments to pool
+        
         foreach (var env in activeEnvironments.ToList())
         {
             ReturnEnvironmentToPool(env);
