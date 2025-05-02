@@ -4790,351 +4790,6 @@ MonoBehaviour:
   nameText: {fileID: 0}
   subNameText: {fileID: 0}
   audioClip: {fileID: 0}
---- !u!1 &853341944
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 853341946}
-  - component: {fileID: 853341947}
-  - component: {fileID: 853341948}
-  m_Layer: 0
-  m_Name: CardController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &853341946
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 853341944}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.2779957, y: 1.5613221, z: 0.1512943}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &853341947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 853341944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2db525d177b4bdf498891dd8b629ac4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AllCardsAndThemes:
-  - Button: {fileID: 1909290864}
-    imagePng: {fileID: 2800000, guid: 57a53e98436984f43bd237f1d0f1a432, type: 3}
-    PriText: Relax and Unwind
-    subText: 'For deep relaxation, stress relief, and calming the senses. '
-    nameText: {fileID: 1557223689}
-    subNameText: {fileID: 1892623497}
-    CardDetails:
-    - imagePng: {fileID: 2800000, guid: 3a69894acc219bb4784cc31af09de2ba, type: 3}
-      PriText: 'Candle-lit Zen Garden at Night '
-      subText: Minimalist Japanese garden, raked sand, small pond, bonsai trees,
-        glowing lanterns, peaceful nighttime ambience, faint sound of water trickling
-      nameText: {fileID: 235913598}
-      subNameText: {fileID: 1848526883}
-      PrefabToInstantitate: {fileID: 4428728363796222371, guid: 71368a036493594479144e91cddad964, type: 3}
-      audioClip: {fileID: 8300000, guid: 91b889c9b323b294eb24c2fb154e6885, type: 3}
-    - imagePng: {fileID: 2800000, guid: 9b6f776781640f04dae4e07444bc29ce, type: 3}
-      PriText: Cozy Rainy Garden
-      subText: A lush green garden with light rainfall, stone paths, and a small
-        covered seating area with cushions and candles
-      nameText: {fileID: 2027017188}
-      subNameText: {fileID: 290267598}
-      PrefabToInstantitate: {fileID: 8542042497480103168, guid: b4b46e19885c1c94b8b501934e6bc043, type: 3}
-      audioClip: {fileID: 8300000, guid: 55221c0a77b3faa4895dbd0e870f923f, type: 3}
-    - imagePng: {fileID: 2800000, guid: 764ffbab4e47c5948b1d4e80dc93ce67, type: 3}
-      PriText: Lakeside with Wooden Dock
-      subText: A still lake with a small wooden dock, surrounded by trees, gentle
-        ripples on the water, and reflections of the sky
-      nameText: {fileID: 1769293146}
-      subNameText: {fileID: 1935706442}
-      PrefabToInstantitate: {fileID: 6338230275212137498, guid: 381cd709498f9c346a671095bf54ca70, type: 3}
-      audioClip: {fileID: 8300000, guid: 198607630596d28438a4181956f9fd64, type: 3}
-    - imagePng: {fileID: 2800000, guid: c8a34423b248fbd47adfa06c55483ece, type: 3}
-      PriText: Tropical Cove
-      subText: A serene tropical cove with towering palm trees, crystal-clear turquoise
-        waters shimmering under the golden sun, a soft ocean breeze carrying the
-        scent of salt and flowers
-      nameText: {fileID: 382523149}
-      subNameText: {fileID: 1315686928}
-      PrefabToInstantitate: {fileID: 1018142811171473115, guid: 5a98a20fb06a28945bc2d2faf112a477, type: 3}
-      audioClip: {fileID: 8300000, guid: ee99e083828760a42a586bc92680afbe, type: 3}
-    - imagePng: {fileID: 2800000, guid: 192ed6a2932469048ae75af10e97b1ad, type: 3}
-      PriText: 'Forest Clearing at Sunset '
-      subText: A quiet forest clearing at sunset with soft golden light filtering
-        through the trees, surrounded by moss and wildflowers
-      nameText: {fileID: 2104135798}
-      subNameText: {fileID: 396920888}
-      PrefabToInstantitate: {fileID: 3641736829216918724, guid: 669e673df65abb24790a1f74b7ed4980, type: 3}
-      audioClip: {fileID: 8300000, guid: 69c2f7222d513214b82c7e402bf0ab58, type: 3}
-  - Button: {fileID: 1039652526}
-    imagePng: {fileID: 2800000, guid: fe3bca68984b8ac42ad6c46343278cf8, type: 3}
-    PriText: Boost Your Mood
-    subText: For joy, warmth, and emotional upliftment.
-    nameText: {fileID: 1710559252}
-    subNameText: {fileID: 1524731181}
-    CardDetails:
-    - imagePng: {fileID: 2800000, guid: 70692f9ad4595e84c9086a3274cc0fb5, type: 3}
-      PriText: Lavender Field at Golden Hour
-      subText: Endless lavender fields glowing under the golden hour sun, with butterflies
-        fluttering and a soft breeze moving the flowers
-      nameText: {fileID: 235913598}
-      subNameText: {fileID: 1848526883}
-      PrefabToInstantitate: {fileID: 7686152962852872132, guid: c7b7dd429614061408bbb85af0b26b12, type: 3}
-      audioClip: {fileID: 8300000, guid: 5b420b74ecca60646ba04a25bcc5f8a4, type: 3}
-    - imagePng: {fileID: 2800000, guid: 86ea86b3c2e3f5b468eb0fe292628a33, type: 3}
-      PriText: Cherry Blossom Park
-      subText: A tranquil park filled with blooming cherry blossom trees, petals
-        falling gently, and benches under the canopy
-      nameText: {fileID: 2027017188}
-      subNameText: {fileID: 290267598}
-      PrefabToInstantitate: {fileID: 7764067053987151353, guid: 71e55c465f0522d40bf7efbdfbb11d2b, type: 3}
-      audioClip: {fileID: 8300000, guid: ef7f6d3f6254af54088f2229dd6e7091, type: 3}
-    - imagePng: {fileID: 2800000, guid: e5d1aebcf21f53943892d65054a10697, type: 3}
-      PriText: Hilltop Viewpoint in Spring
-      subText: A scenic grassy hilltop with wildflowers overlooking rolling green
-        hills, under a vibrant blue sky with scattered clouds
-      nameText: {fileID: 1769293146}
-      subNameText: {fileID: 1935706442}
-      PrefabToInstantitate: {fileID: 5377477146233412239, guid: d707fed70d1ad8b4ab6f3790399b8bbb, type: 3}
-      audioClip: {fileID: 8300000, guid: b394b36c0a733ea49b1cc6ac171266e7, type: 3}
-    - imagePng: {fileID: 2800000, guid: eab53e49a94765141b4af07c1f4a9e4c, type: 3}
-      PriText: Tropical Sunrise Beach
-      subText: A sunrise over a quiet tropical beach with pink skies, soft waves,
-        and seashells along the sand.
-      nameText: {fileID: 382523149}
-      subNameText: {fileID: 1315686928}
-      PrefabToInstantitate: {fileID: 4746343502711001262, guid: 2f4fbf4d8f9064d438c9e50da985d589, type: 3}
-      audioClip: {fileID: 8300000, guid: ee99e083828760a42a586bc92680afbe, type: 3}
-    - imagePng: {fileID: 2800000, guid: f651f44a768d36349b35e1e84d61b42b, type: 3}
-      PriText: Sunlit Countryside Trail
-      subText: A warm countryside winding dirt path through fields, under a clear
-        sky
-      nameText: {fileID: 2104135798}
-      subNameText: {fileID: 396920888}
-      PrefabToInstantitate: {fileID: 2521351096540160, guid: 391ad1491c9cc9f47807d3d3372400c1, type: 3}
-      audioClip: {fileID: 8300000, guid: 69c2f7222d513214b82c7e402bf0ab58, type: 3}
-  - Button: {fileID: 263259366}
-    imagePng: {fileID: 2800000, guid: 0201532645be39d4f8137ef32fead1bb, type: 3}
-    PriText: 'Breathe & Flow '
-    subText: For guided breathing, rhythm, and grounding
-    nameText: {fileID: 900465957}
-    subNameText: {fileID: 1292124911}
-    CardDetails:
-    - imagePng: {fileID: 2800000, guid: 67f5a2231ae4d4d4599275c72dd773e5, type: 3}
-      PriText: Ocean Cliffs with Crashing Waves
-      subText: Rocky ocean cliffs with waves rhythmically crashing below and seagulls
-        flying in the distance
-      nameText: {fileID: 235913598}
-      subNameText: {fileID: 1848526883}
-      PrefabToInstantitate: {fileID: 4021863135622616797, guid: 5111c93bf542a4c4f9dfbc903e5c16e8, type: 3}
-      audioClip: {fileID: 8300000, guid: ee99e083828760a42a586bc92680afbe, type: 3}
-    - imagePng: {fileID: 2800000, guid: ea2e53b391aacd7478e82c29853fe84f, type: 3}
-      PriText: 'Flowing River Through Forest '
-      subText: A gently flowing river winding through a dense forest, with smooth
-        rocks and dappled sunlight on the water
-      nameText: {fileID: 2027017188}
-      subNameText: {fileID: 290267598}
-      PrefabToInstantitate: {fileID: 5775568707365279045, guid: e86b818accee6ba4fbce29eaacd97bb3, type: 3}
-      audioClip: {fileID: 8300000, guid: dcd76407436814247889a6cb10f2b645, type: 3}
-    - imagePng: {fileID: 2800000, guid: a917eb22379ebc94cb68e044bf0cdfb3, type: 3}
-      PriText: Waterfall in Jungle Oasis
-      subText: A waterfall cascading into a clear pool surrounded by tropical plants
-        and ambient mist.
-      nameText: {fileID: 1769293146}
-      subNameText: {fileID: 1935706442}
-      PrefabToInstantitate: {fileID: 3638083990524105251, guid: 546871f0fb64cd7409188887bce47b4e, type: 3}
-      audioClip: {fileID: 8300000, guid: 294a666772c6f1b4e9ed782cd93fb556, type: 3}
-    - imagePng: {fileID: 2800000, guid: a3595aef653d94240b61900033c540db, type: 3}
-      PriText: Calm Rain Over Lake
-      subText: A quiet lake under soft rain with concentric ripples forming on the
-        water, surrounded by foggy trees
-      nameText: {fileID: 382523149}
-      subNameText: {fileID: 1315686928}
-      PrefabToInstantitate: {fileID: 6294349878313111777, guid: 7259bf0397be71f4a98557a6351a0846, type: 3}
-      audioClip: {fileID: 8300000, guid: 198607630596d28438a4181956f9fd64, type: 3}
-    - imagePng: {fileID: 2800000, guid: 703dd9a759f09e2418f97f3a18ebb1f1, type: 3}
-      PriText: 'Zen Garden Stream '
-      subText: A Japanese-style zen garden with a small flowing stream, stepping
-        stones, and bamboo gently swaying in the wind.
-      nameText: {fileID: 2104135798}
-      subNameText: {fileID: 396920888}
-      PrefabToInstantitate: {fileID: 9166869485373062322, guid: 2927e9631fda3514a95d09574802cc61, type: 3}
-      audioClip: {fileID: 8300000, guid: 6620caaff73b6764e8cbace1d8e2986a, type: 3}
-  - Button: {fileID: 783273598}
-    imagePng: {fileID: 2800000, guid: e7431f93b4b7c474dbb3d239a791115c, type: 3}
-    PriText: 'Look Within '
-    subText: 'For introspection, reflection, and spiritual depth. '
-    nameText: {fileID: 1631604996}
-    subNameText: {fileID: 98274936}
-    CardDetails:
-    - imagePng: {fileID: 2800000, guid: c40885046e6184f4fbe7c1cc0755d6ae, type: 3}
-      PriText: Starry Desert Night
-      subText: A wide-open desert under a star-filled sky and a glowing Milky Way,
-        with a small fire pit at the center.
-      nameText: {fileID: 235913598}
-      subNameText: {fileID: 1848526883}
-      PrefabToInstantitate: {fileID: 4371920895901256818, guid: 91807e016655b474cbff9bc4860933cf, type: 3}
-      audioClip: {fileID: 8300000, guid: c8af7d15ad647044d962faf07afabb58, type: 3}
-    - imagePng: {fileID: 2800000, guid: b7bd1f8f3a78a064f9ff0033e6d113ef, type: 3}
-      PriText: Northern Lights Over The Arctic
-      subText: A glowing aurora borealis over icebergs in the arctic, with soft light
-        reflecting off the snow
-      nameText: {fileID: 2027017188}
-      subNameText: {fileID: 290267598}
-      PrefabToInstantitate: {fileID: 7618808391293373792, guid: ef88d49ced54fe8458647d0bf71133ff, type: 3}
-      audioClip: {fileID: 8300000, guid: 1d56bab3d6e01e849ae1f5333d7a7d94, type: 3}
-    - imagePng: {fileID: 2800000, guid: 91c651a4cf8128444b4c417f8f3bba5c, type: 3}
-      PriText: Temple Courtyard at Dusk
-      subText: A peaceful temple courtyard with lanterns, incense smoke curling in
-        the air, and mountain silhouettes in the background
-      nameText: {fileID: 1769293146}
-      subNameText: {fileID: 1935706442}
-      PrefabToInstantitate: {fileID: 7090712339164416000, guid: 7024c5d53467a4543a8de98ff10809d3, type: 3}
-      audioClip: {fileID: 8300000, guid: 0afc21d3d41eb69419f92844ae05ec96, type: 3}
-    - imagePng: {fileID: 2800000, guid: b50f349eb4473ab49a97ef528d4f4219, type: 3}
-      PriText: 'Mountain Peak Meditation Spot '
-      subText: A mountaintop with panoramic views, clouds below, and a meditation
-        cushion facing the horizon
-      nameText: {fileID: 382523149}
-      subNameText: {fileID: 1315686928}
-      PrefabToInstantitate: {fileID: 8508149945553572789, guid: 5a58ebc021ebc38479e4b3f4d5bb85fd, type: 3}
-      audioClip: {fileID: 8300000, guid: 1d56bab3d6e01e849ae1f5333d7a7d94, type: 3}
-    - imagePng: {fileID: 2800000, guid: 96f0a052d58a4a244a90459fd84fbf00, type: 3}
-      PriText: Floating in the Cosmos
-      subText: A surreal space scene where the viewer floats above planets and nebulae,
-        surrounded by stars and galaxies.
-      nameText: {fileID: 2104135798}
-      subNameText: {fileID: 396920888}
-      PrefabToInstantitate: {fileID: 6692260324522127017, guid: b653c5de1043af343b08a0be4723123b, type: 3}
-      audioClip: {fileID: 8300000, guid: 6acc8810e0ee21d49ba2703a1c26d7a1, type: 3}
-  - Button: {fileID: 1203411593}
-    imagePng: {fileID: 2800000, guid: e20a023abaa11364a8c100b5216fe874, type: 3}
-    PriText: Focus & Clarity
-    subText: For mindful attention and mental clarity
-    nameText: {fileID: 903802794}
-    subNameText: {fileID: 206605679}
-    CardDetails:
-    - imagePng: {fileID: 2800000, guid: d00339d3351a84d449a08cb4e57eeca5, type: 3}
-      PriText: Glass Dome in Nature
-      subText: A transparent glass dome in the middle of a forest, letting in filtered
-        light and forest views on all sides
-      nameText: {fileID: 235913598}
-      subNameText: {fileID: 1848526883}
-      PrefabToInstantitate: {fileID: 3395838236355298990, guid: 2d9fb754aa44a6c4f950e46f0122b258, type: 3}
-      audioClip: {fileID: 8300000, guid: c892e6af3063ede4cb7d7d6294e281dc, type: 3}
-    - imagePng: {fileID: 2800000, guid: 4ed874315f5563e41aa27a98ae0d5c6b, type: 3}
-      PriText: Mountain Cabin Study View
-      subText: A cozy mountain cabin interior with a large window showing snow-covered
-        peaks and a clean wooden desk
-      nameText: {fileID: 2027017188}
-      subNameText: {fileID: 290267598}
-      PrefabToInstantitate: {fileID: 5414417811287931538, guid: c28d4865cc445134887e1f7cbe42d790, type: 3}
-      audioClip: {fileID: 8300000, guid: b394b36c0a733ea49b1cc6ac171266e7, type: 3}
-    - imagePng: {fileID: 2800000, guid: e27ecd1ae3be2dd4693adafa687c9eab, type: 3}
-      PriText: Zen Rock Garden
-      subText: A traditional Japanese rock garden with raked sand, stones, and bamboo
-        walls under soft ambient lighting
-      nameText: {fileID: 1769293146}
-      subNameText: {fileID: 1935706442}
-      PrefabToInstantitate: {fileID: 1472159721558801317, guid: d830ce6bc8f88c44f99950d6e34f03b5, type: 3}
-      audioClip: {fileID: 8300000, guid: c892e6af3063ede4cb7d7d6294e281dc, type: 3}
-    - imagePng: {fileID: 2800000, guid: c1617a858ca82b24b9821267afa767a0, type: 3}
-      PriText: Open Grassland with Clear Skies
-      subText: A wide-open grassy plain with nothing obstructing the view, under
-        a vast blue sky with subtle wind patterns
-      nameText: {fileID: 382523149}
-      subNameText: {fileID: 1315686928}
-      PrefabToInstantitate: {fileID: 8562349785959191483, guid: 5ed1023c26249084b8cec13d4a9eab89, type: 3}
-      audioClip: {fileID: 8300000, guid: 7fa0b2322efc9644a9fb64b7114e5d1f, type: 3}
-    - imagePng: {fileID: 2800000, guid: 4bf1e6b56ca38d1499b5b07c4ca915b7, type: 3}
-      PriText: Wooden bench in a forest
-      subText: A serene green haven with soft morning breeze
-      nameText: {fileID: 2104135798}
-      subNameText: {fileID: 396920888}
-      PrefabToInstantitate: {fileID: 5990102477293622215, guid: 74f4d2e5d52f61b448cc97960474198d, type: 3}
-      audioClip: {fileID: 8300000, guid: fd6783be11a4d964fa1550c8e95cd98c, type: 3}
-  - Button: {fileID: 1745893665}
-    imagePng: {fileID: 2800000, guid: b703b9fef4b81804da227d052d9f941f, type: 3}
-    PriText: Dream & Imagine
-    subText: 'For creative visualizations, inner journeys, or playful escape. '
-    nameText: {fileID: 1061907966}
-    subNameText: {fileID: 481879274}
-    CardDetails:
-    - imagePng: {fileID: 2800000, guid: 055f9295aa196884b902971cc33c9688, type: 3}
-      PriText: Floating Islands in a Dream Sky
-      subText: A surreal landscape of floating islands connected by vines and bridges,
-        under a cotton candy colored sky.
-      nameText: {fileID: 235913598}
-      subNameText: {fileID: 1848526883}
-      PrefabToInstantitate: {fileID: 2659857396368385102, guid: 83edd62dc7a253848a2dfc92950a9220, type: 3}
-      audioClip: {fileID: 8300000, guid: 6a569aa22411c98489accced7fe89d17, type: 3}
-    - imagePng: {fileID: 2800000, guid: 5515b4214919af44fa5519d31cc4e49d, type: 3}
-      PriText: Crystal Cave of Light
-      subText: A glowing crystal cave with pulsing colored light, reflections on
-        the ground, and an ethereal atmosphere
-      nameText: {fileID: 2027017188}
-      subNameText: {fileID: 290267598}
-      PrefabToInstantitate: {fileID: 2582950547822381343, guid: 444103ad38947ac418f2a4dd352dfe31, type: 3}
-      audioClip: {fileID: 8300000, guid: e8914ec4832203640998260e0cd7b528, type: 3}
-    - imagePng: {fileID: 2800000, guid: a6f744e142d9d934c910bef147aa5df7, type: 3}
-      PriText: Starlit Meditation Pod
-      subText: A futuristic pod floating in space with 360 views of stars, planets,
-        and nebulae through glass walls
-      nameText: {fileID: 1769293146}
-      subNameText: {fileID: 1935706442}
-      PrefabToInstantitate: {fileID: 5075932718477531440, guid: d0f64bcd1f259784fb85e9002dc48874, type: 3}
-      audioClip: {fileID: 8300000, guid: c373f9098ca3d034c9879c3ec78f8b21, type: 3}
-    - imagePng: {fileID: 2800000, guid: 82d5126d83e8cb841b6039a4648fd905, type: 3}
-      PriText: Abstract Energy Field
-      subText: A soft, abstract landscape filled with floating orbs and colorful
-        waves of energy moving slowly.
-      nameText: {fileID: 382523149}
-      subNameText: {fileID: 1315686928}
-      PrefabToInstantitate: {fileID: 6826870417141564407, guid: 52d980403944a0a4693456302e566337, type: 3}
-      audioClip: {fileID: 8300000, guid: 6acc8810e0ee21d49ba2703a1c26d7a1, type: 3}
-    - imagePng: {fileID: 2800000, guid: 71869db244761624ab2c829a352b285c, type: 3}
-      PriText: 'Fantasy Garden with Giant Flowers  '
-      subText: A magical garden where oversized flowers gently sway, with bioluminescent
-        bugs and soft lights all around
-      nameText: {fileID: 2104135798}
-      subNameText: {fileID: 396920888}
-      PrefabToInstantitate: {fileID: 8726284876319152331, guid: 454d6af0b4c2f094186e55ab3534687e, type: 3}
-      audioClip: {fileID: 8300000, guid: 0afc21d3d41eb69419f92844ae05ec96, type: 3}
-  SelectedCards: []
-  CurrentSelectionIndex: 0
-  CurrentSubSelectionIndex: 0
-  maxSelectionIndex: 0
-  maxCurrentSubSelectionIndex: 0
---- !u!114 &853341948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 853341944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5350f7e7f5ad32d4f95ef371c56a1708, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &861144120
 GameObject:
   m_ObjectHideFlags: 0
@@ -6426,302 +6081,6 @@ MonoBehaviour:
     m_InputActionReference: {fileID: 0}
     m_ObjectReferenceObject: {fileID: 0}
     m_ManualValue: {x: 0, y: 0}
---- !u!1 &1163394046
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1163394048}
-  - component: {fileID: 1163394047}
-  - component: {fileID: 1163394049}
-  m_Layer: 0
-  m_Name: MenuSounds
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!82 &1163394047
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1163394046}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1.5
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!4 &1163394048
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1163394046}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.66346574, y: 1.0175676, z: 0.82694745}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1163394049
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1163394046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78e07b98b924c424488addb2cbf151ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clickSound: {fileID: 8300000, guid: 207472614757af64289909cdf8d1214f, type: 3}
-  selectSound: {fileID: 8300000, guid: a7e73f75b673e424382d14eb25e01134, type: 3}
-  changeSceneSound: {fileID: 8300000, guid: a7e73f75b673e424382d14eb25e01134, type: 3}
---- !u!1 &1186591401
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1186591404}
-  - component: {fileID: 1186591403}
-  - component: {fileID: 1186591402}
-  m_Layer: 0
-  m_Name: AudioLoop
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!82 &1186591402
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1186591401}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!114 &1186591403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1186591401}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: caed2d4dcb1cdd04a97e201be90108d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioClips:
-  - {fileID: 8300000, guid: 7c0e6830f70d2c24083641de9c00f10c, type: 3}
-  - {fileID: 8300000, guid: ffa447c730c0c0f43b7bc7dc1fc7516e, type: 3}
-  - {fileID: 8300000, guid: 432865e1e34c6cc428967d1d6476f995, type: 3}
-  - {fileID: 8300000, guid: dd27b32df696ff0409cddac6cc88dd15, type: 3}
-  - {fileID: 8300000, guid: 29cc256c7a52bbc49b83626b5d0a57ae, type: 3}
-  fadeDuration: 1
-  minDelay: 1
-  maxDelay: 5
---- !u!4 &1186591404
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1186591401}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.66346574, y: 1.0175676, z: 0.82694745}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1203411590
 GameObject:
   m_ObjectHideFlags: 0
@@ -10025,150 +9384,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1869017891}
   m_CullTransparentMesh: 1
---- !u!1 &1875147238
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1875147241}
-  - component: {fileID: 1875147240}
-  - component: {fileID: 1875147239}
-  m_Layer: 0
-  m_Name: SceneAmbientAudio
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!82 &1875147239
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1875147238}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 0.5
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!114 &1875147240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1875147238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9082ee11341e0342b78d6bbe866701b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 1875147239}
-  AudioVolume: 0.4
---- !u!4 &1875147241
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1875147238}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.66346574, y: 1.0175676, z: 0.82694745}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1892623495
 GameObject:
   m_ObjectHideFlags: 0
@@ -10611,238 +9826,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1935706440}
   m_CullTransparentMesh: 1
---- !u!1 &1945615862
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1945615864}
-  - component: {fileID: 1945615863}
-  - component: {fileID: 1945615865}
-  m_Layer: 0
-  m_Name: JoystickController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1945615863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1945615862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc03ee054ee76e84d9f771c6cc96d415, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftJoystickAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Left Joystick
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 22036f36-c147-47b0-b0de-f91188bce8fe
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  rightJoystickAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Right Joystick
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: ae458ed7-a4d3-49a2-912a-5711888e5831
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: -8198699208435500284, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  leftJoystickActionForTrigger:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Left Joystick Action For Trigger
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 67abc667-5a06-45d1-9d55-360ee3482fea
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: -6395602842196007441, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  rightJoystickActionForTrigger:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Right Joystick Action For Trigger
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 30cb2f04-fe5d-4673-8a4b-4382e06acca7
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 3279264004350380116, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  BackButtonAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Back Button
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 7d9053ca-165a-429c-96ed-65f90f34a6d3
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: -631344258065148156, guid: e0ca4504471ca124088e1e2cfe6804ae, type: 3}
-  onJoystickLeftLeft:
-    m_PersistentCalls:
-      m_Calls: []
-  onJoystickLeftRight:
-    m_PersistentCalls:
-      m_Calls: []
-  onTriggerPressed:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1945615865}
-        m_TargetAssemblyTypeName: Uicontroller, Assembly-CSharp
-        m_MethodName: OnMenuSelect
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onJoystickRightLeft:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1945615865}
-        m_TargetAssemblyTypeName: Uicontroller, Assembly-CSharp
-        m_MethodName: OnJoystickLeft
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: '  RightRightRight'
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2041663787}
-        m_TargetAssemblyTypeName: HapticFeedback, Assembly-CSharp
-        m_MethodName: SendHapticImpulse
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: '  RightRightRight'
-          m_BoolArgument: 0
-        m_CallState: 2
-  onJoystickRightRight:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1945615865}
-        m_TargetAssemblyTypeName: Uicontroller, Assembly-CSharp
-        m_MethodName: OnJoystickRight
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: '  RightRightRight'
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2041663787}
-        m_TargetAssemblyTypeName: HapticFeedback, Assembly-CSharp
-        m_MethodName: SendHapticImpulse
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: '  RightRightRight'
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnBackButtonPressed:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1945615862}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-        m_MethodName: set_name
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: BackButton
-          m_BoolArgument: 0
-        m_CallState: 2
-  triggerThreshold: 0.5
---- !u!4 &1945615864
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1945615862}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3955172, y: 1.0256343, z: 2.0211978}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1945615865
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1945615862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db89e2605e728ed4faaa72c053e1cfce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isMenuLooping: 1
-  menuIndex: 0
-  SelectionMenuPanelButtons:
-  - {fileID: 1909290864}
-  - {fileID: 1039652526}
-  - {fileID: 263259366}
-  - {fileID: 783273598}
-  - {fileID: 1203411593}
-  - {fileID: 1745893665}
-  SubPanels:
-  - {fileID: 840170334}
-  - {fileID: 404149765}
-  - {fileID: 1381097822}
-  - {fileID: 56914595}
-  - {fileID: 1730875314}
-  OnMenuItemSelected:
-    m_PersistentCalls:
-      m_Calls: []
-  OnMenuItemHover:
-    m_PersistentCalls:
-      m_Calls: []
-  menuSelected: 0
-  EnteredScene: 0
-  LoadPrevScene: 0
 --- !u!20 &1948693200 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 657184242118504724, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
@@ -11029,6 +10012,129 @@ MonoBehaviour:
   m_Mediator: {fileID: 558904277}
   m_TransformationPriority: 0
   m_DelayTime: 0
+--- !u!1 &1986031499
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1986031500}
+  - component: {fileID: 1986031501}
+  - component: {fileID: 1986031502}
+  m_Layer: 0
+  m_Name: AssetBundleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1986031500
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986031499}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1986031501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986031499}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae68d00fbd70fdd48b53738d4111112b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  assetBundleNames:
+  - zengardennew_00
+  - cozygardennew_01
+  - lakesidenew_02
+  - tropicalnew_03
+  - forestnew_4
+  - lavendernew_05
+  - cherryblossomnew_06
+  - hilltopnew_07
+  - beachnew_08
+  - countrysidenew_09
+  - opencliffnew_10
+  - rivernew_11
+  - waterfallnew_12
+  - calmlakenew_13
+  - gardenstreamnew_14
+  - starrydesertnightnew_15
+  - northernlightsnew_16
+  - temple_17
+  - mountain_18
+  - cosmos_19
+  - glassdome_20
+  - cabin_21
+  - rockgarden_22
+  - opengrassland_23
+  - bench_24
+  - floating_25
+  - crystal_26
+  - rainbow_27
+  - orbs_28
+  - magical_29
+--- !u!114 &1986031502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986031499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89137b6476e90e64f926448f22799b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AssetBundleNames:
+  - zengardennew_00
+  - cozygardennew_01
+  - lakesidenew_02
+  - tropicalnew_03
+  - forestnew_4
+  - lavendernew_05
+  - cherryblossomnew_06
+  - hilltopnew_07
+  - beachnew_08
+  - countrysidenew_09
+  - opencliffnew_10
+  - rivernew_11
+  - waterfallnew_12
+  - calmlakenew_13
+  - gardenstreamnew_14
+  - starrydesertnightnew_15
+  - northernlightsnew_16
+  - temple_17
+  - mountain_18
+  - cosmos_19
+  - glassdome_20
+  - cabin_21
+  - rockgarden_22
+  - opengrassland_23
+  - bench_24
+  - floating_25
+  - crystal_26
+  - rainbow_27
+  - orbs_28
+  - magical_29
+  spawnPoint: {x: 0, y: 0, z: 0}
+  FailedPrefab: {fileID: 0}
+  DonePrefab: {fileID: 0}
+  verbose: 1
 --- !u!1 &1995010553
 GameObject:
   m_ObjectHideFlags: 0
@@ -11482,54 +10588,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2027017186}
   m_CullTransparentMesh: 1
---- !u!1 &2041663786
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2041663788}
-  - component: {fileID: 2041663787}
-  m_Layer: 0
-  m_Name: xrhaptics
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2041663787
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2041663786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16023fe2fa00d6d468c1332a03818dd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  duration: 0.2
-  amplitude: 0.7
-  hand: 5
-  channel: 0
---- !u!4 &2041663788
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2041663786}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.5331147, y: -0.33968514, z: 0.5180741}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2076069767
 GameObject:
   m_ObjectHideFlags: 0
@@ -12381,9 +11439,4 @@ SceneRoots:
   - {fileID: 5534409079552104243}
   - {fileID: 7578513822832117759}
   - {fileID: 7578513823358268787}
-  - {fileID: 853341946}
-  - {fileID: 1945615864}
-  - {fileID: 2041663788}
-  - {fileID: 1186591404}
-  - {fileID: 1163394048}
-  - {fileID: 1875147241}
+  - {fileID: 1986031500}

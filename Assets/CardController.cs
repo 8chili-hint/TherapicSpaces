@@ -291,4 +291,5 @@ public struct CardFiller
     public TMPro.TextMeshProUGUI nameText, subNameText;
     public GameObject PrefabToInstantitate;
     public AudioClip audioClip;
+    public int GlobalIndex;
 }

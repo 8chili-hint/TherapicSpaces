@@ -1,0 +1,99 @@
+ManifestFileVersion: 0
+UnityVersion: 6000.0.44f1
+CRC: 3837766442
+HashAppended: 0
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: ardebugmenu
+      Dependencies: {}
+    Info_1:
+      Name: temple_17
+      Dependencies: {}
+    Info_2:
+      Name: mountain_18
+      Dependencies: {}
+    Info_3:
+      Name: cosmos_19
+      Dependencies: {}
+    Info_4:
+      Name: glassdome_20
+      Dependencies: {}
+    Info_5:
+      Name: cabin_21
+      Dependencies: {}
+    Info_6:
+      Name: rockgarden_22
+      Dependencies: {}
+    Info_7:
+      Name: opengrassland_23
+      Dependencies: {}
+    Info_8:
+      Name: bench_24
+      Dependencies: {}
+    Info_9:
+      Name: floating_25
+      Dependencies: {}
+    Info_10:
+      Name: crystal_26
+      Dependencies: {}
+    Info_11:
+      Name: rainbow_27
+      Dependencies: {}
+    Info_12:
+      Name: orbs_28
+      Dependencies: {}
+    Info_13:
+      Name: magical_29
+      Dependencies: {}
+    Info_14:
+      Name: beachnew_08
+      Dependencies: {}
+    Info_15:
+      Name: calmlakenew_13
+      Dependencies: {}
+    Info_16:
+      Name: cherryblossomnew_06
+      Dependencies: {}
+    Info_17:
+      Name: opencliffnew_10
+      Dependencies: {}
+    Info_18:
+      Name: northernlightsnew_16
+      Dependencies: {}
+    Info_19:
+      Name: gardenstreamnew_14
+      Dependencies: {}
+    Info_20:
+      Name: cozygardennew_01
+      Dependencies: {}
+    Info_21:
+      Name: hilltopnew_07
+      Dependencies: {}
+    Info_22:
+      Name: lakesidenew_02
+      Dependencies: {}
+    Info_23:
+      Name: lavendernew_05
+      Dependencies: {}
+    Info_24:
+      Name: starrydesertnightnew_15
+      Dependencies: {}
+    Info_25:
+      Name: waterfallnew_12
+      Dependencies: {}
+    Info_26:
+      Name: countrysidenew_09
+      Dependencies: {}
+    Info_27:
+      Name: forestnew_4
+      Dependencies: {}
+    Info_28:
+      Name: rivernew_11
+      Dependencies: {}
+    Info_29:
+      Name: tropicalnew_03
+      Dependencies: {}
+    Info_30:
+      Name: zengardennew_00
+      Dependencies: {}
