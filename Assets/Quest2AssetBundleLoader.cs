@@ -36,6 +36,7 @@ public class Quest2AssetBundleLoader : MonoBehaviour
     {
         // Start the loading process
         StartCoroutine(LoadAssetBundles());
+        BetterStreamingAssets.Initialize();
     }
 
     IEnumerator LoadAssetBundles()
@@ -112,12 +113,15 @@ public class Quest2AssetBundleLoader : MonoBehaviour
 
         // Load the asset bundle
         LogMessage("Loading environment from: " + bundlePath);
-        UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(bundlePath);
-        yield return request.SendWebRequest();
+        // UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(bundlePath);
+        
+        AssetBundleCreateRequest bundleRequest = BetterStreamingAssets.LoadAssetBundleAsync(bundlePath);
+        yield return bundleRequest;
+        AssetBundle bundle = bundleRequest.assetBundle;
 
-        if (request.result == UnityWebRequest.Result.Success)
+        // if (request.result == UnityWebRequest.Result.Success)
         {
-            AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(request);
+            
             if (bundle != null)
             {
                 loadedBundles.Add(bundle);
