@@ -1,0 +1,35 @@
+ManifestFileVersion: 0
+UnityVersion: 6000.0.44f1
+CRC: 3597431239
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 0e0efec65c275acbc7d85be70ed81e94
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 3219c50854ff2a782d7e36576b5dbf5b
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: e6ec1093cdfd9e705629ed534222b9dd
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/_Prefabs/rivernew_11.prefab
+Dependencies: []

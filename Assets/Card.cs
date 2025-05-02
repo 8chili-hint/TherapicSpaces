@@ -9,7 +9,7 @@ public class Card : MonoBehaviour
     public string name, subText;
     public TMPro.TextMeshProUGUI nameText, subNameText;
     public AudioClip audioClip;
-
+    public int GlobalIndex;
 
     public void SetCard()
     {
@@ -18,7 +18,7 @@ public class Card : MonoBehaviour
         nameText.text = name;
         subNameText.text = subText;
         GetComponent<Button>().onClick.AddListener(() => {
-            PrefabToInstantitate.SetActive(true);
+            Quest2AssetBundleLoader.Instance.SwitchEnv(GlobalIndex);
         });
         
        
@@ -26,12 +26,12 @@ public class Card : MonoBehaviour
 
     public void disableThisEnv()
     {
-        PrefabToInstantitate.SetActive(false);
+       // PrefabToInstantitate.SetActive(false);
     }
 
     public void enableThisEnv()
     {
-        PrefabToInstantitate.SetActive(true);
+      //  PrefabToInstantitate.SetActive(true);
         AmbientAudioClipManager.Instance.PlayAudio(audioClip);
     }
 }

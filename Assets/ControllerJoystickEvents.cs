@@ -16,7 +16,7 @@ public class ControllerJoystickEvents : MonoBehaviour
 
     public InputActionProperty BackButtonAction;
 
-
+   
     [Header("LeftControllerEvents")]
     public UnityEvent onJoystickLeftLeft; // For left joystick moving left
     public UnityEvent onJoystickLeftRight;

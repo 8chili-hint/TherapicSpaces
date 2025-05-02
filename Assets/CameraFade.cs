@@ -8,7 +8,7 @@ public class CameraFade : MonoBehaviour
     public CanvasGroup canvasGroup;
 
     // Public field for the duration of the fade
-    public float duration = 1.0f;
+    public float duration = 2f;
 
     // Coroutine for fading
     private Coroutine fadeCoroutine;
@@ -16,7 +16,7 @@ public class CameraFade : MonoBehaviour
     public static CameraFade Instance;
 
 
-    public static Action FadeInComplete;
+    public static Action FadeInComplete, PitchToDark, PitchToLight;
     // Make sure CanvasGroup is assigned
     void Awake()
     {
@@ -31,6 +31,9 @@ public class CameraFade : MonoBehaviour
             }
         }
         StartCoroutine(FadeInOutCoroutine(true));
+
+        PitchToDark += () => { StartCoroutine(FadeIn()); };
+        PitchToLight += () => { StartCoroutine(FadeOutCoroutine()); };
     }
     // Public method to start the fade-in-out sequence
     public void FadeInOut()
@@ -84,6 +87,33 @@ public class CameraFade : MonoBehaviour
         }
     }
 
+
+
+
+
+    IEnumerator FadeIn()
+    {
+        float timeElapsed = 0f;
+        canvasGroup.alpha = Mathf.Lerp(0f, 1f, 1);
+        yield return null;
+        canvasGroup.alpha = 1f; 
+       
+    }
+    IEnumerator FadeOutCoroutine()
+    {
+        float timeElapsed = 0f;
+       
+            while (timeElapsed < duration)
+            {
+                canvasGroup.alpha = Mathf.Lerp(1f, 0f, timeElapsed / duration);
+                timeElapsed += Time.deltaTime;
+                yield return null;
+            }
+            canvasGroup.alpha = 0f; // Ensure alpha is 0
+      
+    }
+
+
     // OnDisable to stop coroutine.
     private void OnDisable()
     {
@@ -91,5 +121,9 @@ public class CameraFade : MonoBehaviour
         {
             StopCoroutine(fadeCoroutine);
         }
+
+
+        PitchToDark -= () => { StartCoroutine(FadeIn()); };
+        PitchToLight -= () => { StartCoroutine(FadeOutCoroutine()); };
     }
 }

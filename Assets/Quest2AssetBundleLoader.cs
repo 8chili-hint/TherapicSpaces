@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using System.IO;
+using Better.StreamingAssets;
+using System.Linq;
+using System;
+using UnityEngine.Scripting; // Add the BetterStreamingAssets namespace
 
 public class Quest2AssetBundleLoader : MonoBehaviour
 {
@@ -12,6 +16,7 @@ public class Quest2AssetBundleLoader : MonoBehaviour
     public GameObject CurrEnv { get; private set; }
     public GameObject NextEnv { get; private set; }
     private List<AssetBundle> loadedBundles = new List<AssetBundle>();
+    private List<GameObject> LoadedEnvs = new();
     public List<string> AssetBundlePaths { get; private set; }
 
     private int CurrIndex = 0;
@@ -23,170 +28,91 @@ public class Quest2AssetBundleLoader : MonoBehaviour
     // Debug toggle
     public bool verbose = true;
 
+    public static Quest2AssetBundleLoader Instance;
+
     void Awake()
     {
+        Instance = this;
         AssetBundlePaths = new List<string>();
         if (spawnPoint == Vector3.zero)
         {
             spawnPoint = transform.position;
         }
+        // Initialize Better Streaming Assets
+        BetterStreamingAssets.Initialize();
     }
 
     void Start()
     {
         // Start the loading process
-        StartCoroutine(LoadAssetBundles());
-        BetterStreamingAssets.Initialize();
+        StartCoroutine(GetAllFilePaths());
     }
 
-    IEnumerator LoadAssetBundles()
+    IEnumerator GetAllFilePaths()
     {
+        yield return null;
         LogMessage("Starting Quest2AssetBundleLoader...");
 
         // Process each asset bundle name
         for (int i = 0; i < AssetBundleNames.Count; i++)
         {
             string bundleName = AssetBundleNames[i];
-            // Use the proper path format for Android/Quest
-            string bundlePath = Path.Combine(Application.streamingAssetsPath, bundleName);
-            string androidPath = "file://" + bundlePath; // Important:  Use file:// for Android!
+            string bundlePath =  Path.Combine(Application.streamingAssetsPath , bundleName);
+            AssetBundlePaths.Add(bundlePath); // Store the file:// path
 
-            LogMessage("Trying to load bundle: " + androidPath);
-            AssetBundlePaths.Add(androidPath); // Store the file:// path
-
-            // Try to load the asset bundle
-           /* UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(androidPath);
-            yield return request.SendWebRequest();
-
-            if (request.result == UnityWebRequest.Result.Success)
-            {
-                LogMessage("✓ Successfully yielded assetbundle: " + bundleName);
-
-                AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(request);
-                if (bundle != null)
-                {
-                    LogMessage("✓ Successfully loaded bundle: " + bundleName);
-                }
-                else
-                {
-                    LogError("Bundle loaded but is null: " + bundleName);
-                    if (FailedPrefab) FailedPrefab.SetActive(true);
-                }
-                if (bundle != null)
-                {
-                    bundle.Unload(false);
-                }
-            }
-            else
-            {
-                LogError("Failed to load bundle: " + bundleName + " - Error: " + request.error);
-                if (FailedPrefab) FailedPrefab.SetActive(true);
-            }*/
-        }
-
-        // Report results
-        LogMessage("Found " + AssetBundlePaths.Count + " out of " + AssetBundleNames.Count + " asset bundles");
-
-        // Load the first environment if we found any bundles
-        if (AssetBundlePaths.Count > 0)
-        {
-            yield return StartCoroutine(LoadEnvironment(13));
-        }
-        else
-        {
-            LogError("No asset bundles could be loaded!");
-            if (FailedPrefab) FailedPrefab.SetActive(true);
         }
     }
 
     IEnumerator LoadEnvironment(int index)
     {
-        if (index < 0 || index >= AssetBundlePaths.Count)
-        {
-            LogError("Invalid environment index: " + index);
-            if (FailedPrefab) FailedPrefab.SetActive(true);
-            yield break;
-        }
+        
 
         CurrIndex = index;
         string bundlePath = AssetBundlePaths[index];
 
         // Load the asset bundle
         LogMessage("Loading environment from: " + bundlePath);
-        // UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(bundlePath);
-        
-        AssetBundleCreateRequest bundleRequest = BetterStreamingAssets.LoadAssetBundleAsync(bundlePath);
-        yield return bundleRequest;
-        AssetBundle bundle = bundleRequest.assetBundle;
+        UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(bundlePath); 
+        yield return request.SendWebRequest();
 
-        // if (request.result == UnityWebRequest.Result.Success)
+        AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(request);
+        yield return null; 
+
+        if (bundle != null) // Changed to check if the bundle is valid
         {
-            
-            if (bundle != null)
+            loadedBundles.Add(bundle);
+            GameObject a = (GameObject)bundle.LoadAsset(AssetBundleNames[index]);
+            if (a)
             {
-                loadedBundles.Add(bundle);
-                LogMessage("Asset bundle loaded successfully");
-
-                // Get asset names
-                string[] assetNames = bundle.GetAllAssetNames();
-                LogMessage("Assets in bundle: " + string.Join(", ", assetNames));
-
-                if (assetNames.Length > 0)
-                {
-                    // Load the first asset
-                    string assetPath = assetNames[0];
-                    ResourceRequest assetRequest = bundle.LoadAssetAsync<GameObject>(assetPath);
-                    yield return assetRequest;
-                    GameObject prefab = (GameObject)assetRequest.asset;
-
-
-                    if (prefab != null)
-                    {
-                        // Instantiate the environment
-                        CurrEnv = Instantiate(prefab, spawnPoint, Quaternion.identity);
-                        CurrEnv.SetActive(true);
-                        LogMessage("Environment loaded and instantiated successfully!");
-                        if (DonePrefab) DonePrefab.SetActive(true);
-                    }
-                    else
-                    {
-                        LogError("Failed to load asset from bundle: " + assetPath);
-                        if (FailedPrefab) FailedPrefab.SetActive(true);
-                    }
-                }
-                else
-                {
-                    LogError("No assets found in bundle");
-                    if (FailedPrefab) FailedPrefab.SetActive(true);
-                }
+                var b = Instantiate(a);
+                b.transform.position = (Vector3.zero);
+                b.SetActive(true);
+                LoadedEnvs.Add(b);
+                CameraFade.PitchToLight?.Invoke();
+                Uicontroller.DisableRightStick = false;
             }
             else
             {
-                LogError("Asset bundle content is null");
-                if (FailedPrefab) FailedPrefab.SetActive(true);
+                Uicontroller.DisableRightStick = false;
+                FindAnyObjectByType<Uicontroller>().OnJoystickRight();
             }
         }
         else
         {
-            LogError("Failed to load environment: " + request.error);
+            LogError("Failed to load environment: " + bundlePath);
             if (FailedPrefab) FailedPrefab.SetActive(true);
         }
     }
 
-    public void MoveToNextEnvironment()
+   
+    public void SwitchEnv(int GlobalIndex)
     {
-        int nextIndex = (CurrIndex + 1) % AssetBundlePaths.Count;
-        StartCoroutine(SwitchEnvironment(nextIndex));
+        StartCoroutine(SwitchEnvironment(GlobalIndex));
     }
-
-    public void MoveToPrevEnvironment()
-    {
-        int prevIndex = (CurrIndex - 1 + AssetBundlePaths.Count) % AssetBundlePaths.Count;
-        StartCoroutine(SwitchEnvironment(prevIndex));
-    }
-
+ 
     IEnumerator SwitchEnvironment(int newIndex)
     {
+        Uicontroller.DisableRightStick = true;
         // Clean up current environment
         UnloadEnvironments();
 
@@ -194,26 +120,14 @@ public class Quest2AssetBundleLoader : MonoBehaviour
         yield return StartCoroutine(LoadEnvironment(newIndex));
     }
 
-    void UnloadEnvironments()
+    public void UnloadEnvironments()
     {
-        // Destroy instantiated objects
-        if (PrevEnv) Destroy(PrevEnv);
-        if (CurrEnv) Destroy(CurrEnv);
-        if (NextEnv) Destroy(NextEnv);
-
-        PrevEnv = null;
-        CurrEnv = null;
-        NextEnv = null;
-
-        // Unload all bundles
-        foreach (AssetBundle bundle in loadedBundles)
+        foreach(GameObject a in LoadedEnvs)
         {
-            if (bundle != null)
-            {
-                bundle.Unload(true);
-            }
+            Destroy(a);
         }
-        loadedBundles.Clear();
+        CurrEnv = null;
+       
     }
 
     void OnDestroy()
@@ -232,3 +146,4 @@ public class Quest2AssetBundleLoader : MonoBehaviour
         Debug.LogError("[Quest2AssetBundleLoader] " + message);
     }
 }
+

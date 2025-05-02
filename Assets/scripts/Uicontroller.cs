@@ -5,6 +5,10 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 public class Uicontroller : MonoBehaviour
 {
+    public GameObject MainPanel;
+    public GameObject SubPanel;
+    public GameObject OceanEnv;
+
     public bool isMenuLooping;
     public int menuIndex;
 
@@ -19,6 +23,8 @@ public class Uicontroller : MonoBehaviour
    public bool EnteredScene;
 
     public bool LoadPrevScene;
+    public static bool DisableRightStick;
+
     private void Awake()
     {
         maxIndex =  SelectionMenuPanelButtons.Count;
@@ -33,6 +39,7 @@ public class Uicontroller : MonoBehaviour
         foreach (Button button in SelectionMenuPanelButtons)
         {
             button.OnPointerExit(null);
+          
         }
         SelectionMenuPanelButtons[menuIndex].OnPointerEnter(null);
         CameraFade.FadeInComplete += (() => { if (EnteredScene) { if (LoadPrevScene) { { CardController.Instance.LoadPrevEnv(); } } else { CardController.Instance.LoadNextEnv(); } } });
@@ -41,66 +48,117 @@ public class Uicontroller : MonoBehaviour
 
    public void OnJoystickRight()
     {
-        if (!EnteredScene)
+        if (!DisableRightStick)
         {
-            menuIndex++;
-            if (isMenuLooping)
+            if (!EnteredScene)
             {
-                if (menuIndex > maxIndex - 1)
+                menuIndex++;
+                if (isMenuLooping)
                 {
-                    menuIndex = 0;
+                    if (menuIndex > maxIndex - 1)
+                    {
+                        menuIndex = 0;
+                    }
                 }
+                else
+                {
+                    if (menuIndex > maxIndex - 1)
+                    {
+                        menuIndex = maxIndex - 1;
+                    }
+                }
+                HoverOnMenuItem();
             }
             else
             {
-                if (menuIndex > maxIndex - 1)
-                {
-                    menuIndex = maxIndex - 1;
-                }
+                CameraFade.PitchToDark?.Invoke();
+                SoundClipPlayer.Instance.PlayChangeSceneSound();
+
+                LoadPrevScene = false;
+                CameraFade.FadeInComplete?.Invoke();
             }
-            HoverOnMenuItem();
         }
-        else 
+        
+    }
+
+    [ContextMenu("GoBack")]
+    public void GobackToMainMenu()
+    {
+        
+        menuIndex = 0;
+        menuSelected = false;
+        EnteredScene = false;
+        DisableRightStick = false;
+
+        MainPanel.SetActive(true);
+        SubPanel.SetActive(false);
+
+        Quest2AssetBundleLoader.Instance.UnloadEnvironments();
+        OceanEnv.SetActive(true);
+
+        foreach (Button button in SelectionMenuPanelButtons)
         {
-            CameraFade.Instance.FadeInOut();
-
-            SoundClipPlayer.Instance.PlayChangeSceneSound();
-
-            LoadPrevScene = false;
-            
+            button.OnPointerExit(null);
         }
+
+        CardController.Instance.ResetThisBehaviour();
+
+        foreach (Button button in SelectionMenuPanelButtons)
+        {
+            button.OnPointerExit(null);
+            button.OnDeselect(null);
+            button.GetComponent<Animator>().ResetTrigger("Selected");
+            button.GetComponent<Animator>().ResetTrigger("Pressed");
+            button.GetComponent<Animator>().ResetTrigger("Highlighted");
+            button.GetComponent<Animator>().SetTrigger("Normal");
+        }
+        foreach (Button button in SubPanels)
+        {
+            button.OnPointerExit(null);
+            button.OnDeselect(null);
+            button.GetComponent<Animator>().ResetTrigger("Selected");
+            button.GetComponent<Animator>().ResetTrigger("Pressed");
+            button.GetComponent<Animator>().ResetTrigger("Highlighted");
+            button.GetComponent<Animator>().SetTrigger("Normal");
+        }
+        SelectionMenuPanelButtons[menuIndex].OnPointerEnter(null);
     }
 
     public void OnJoystickLeft()
     {
-        if (!EnteredScene)
+        if (!DisableRightStick)
         {
-            menuIndex--;
-            if (isMenuLooping)
+            if (!EnteredScene)
             {
-                if (menuIndex < 0)
+                menuIndex--;
+                if (isMenuLooping)
                 {
-                    menuIndex = maxIndex - 1;
+                    if (menuIndex < 0)
+                    {
+                        menuIndex = maxIndex - 1;
+                    }
                 }
-            }
 
+                else
+                {
+                    if (menuIndex < 0)
+                    {
+
+                        menuIndex = 0;
+                    }
+                }
+                HoverOnMenuItem();
+            }
             else
             {
-                if (menuIndex < 0)
-                {
+                CameraFade.PitchToDark?.Invoke();
+                SoundClipPlayer.Instance.PlayChangeSceneSound();
+                CameraFade.FadeInComplete?.Invoke();
 
-                    menuIndex = 0;
-                }
+                LoadPrevScene = true;
             }
-            HoverOnMenuItem();
         }
-        else
-        {
-            CameraFade.Instance.FadeInOut();
-            SoundClipPlayer.Instance.PlayChangeSceneSound();
-
-            LoadPrevScene = true;
-        }
+     
     }
 
     void HoverOnMenuItem()
@@ -133,6 +191,10 @@ public class Uicontroller : MonoBehaviour
         if (!menuSelected)
         {
             CardController.Instance.ChangeSlectedCards(menuIndex);
+            foreach (Button button in SelectionMenuPanelButtons)
+            {
+                button.OnPointerExit(null);
+            }
             menuSelected = true;
             menuIndex = 0;
             HoverOnMenuItem();
@@ -147,7 +209,10 @@ public class Uicontroller : MonoBehaviour
         else if(!EnteredScene)
         {
             SoundClipPlayer.Instance.PlaySelectSound();
-
+            foreach (Button button in SubPanels)
+            {
+                button.OnPointerExit(null);
+            }
             SubPanels[menuIndex].onClick?.Invoke();
             CardController.Instance.CurrentSubSelectionIndex = menuIndex;
             EnteredScene = true;

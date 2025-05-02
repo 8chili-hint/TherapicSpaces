@@ -33,6 +33,19 @@ public class CardController : MonoBehaviour
         SetInitialMenu();
     }
 
+    public void ResetThisBehaviour()
+    {
+        SelectedCards.Clear();
+        CurrentSelectionIndex = 0;
+        CurrentSubSelectionIndex = 0; 
+        maxSelectionIndex = 0;
+        maxCurrentSubSelectionIndex = 0;
+        maxSelectionIndex = AllCardsAndThemes.Count - 1;
+
+        SetInitialMenu();
+
+}
+    
     void SetInitialMenu()
     {
         foreach (var ab in AllCardsAndThemes)
@@ -75,11 +88,11 @@ public class CardController : MonoBehaviour
             Card.subNameText = a.subNameText;
             Card.audioClip = a.audioClip;
             Card.enabled = true;
+            Card.GlobalIndex = a.GlobalIndex;
             Card.SetCard();
         }
 
-        // When changing selection, manage environment pool
-        ManageEnvironmentPool();
+       
     }
 
     void InjectCurrentSelection(int i)
@@ -93,7 +106,9 @@ public class CardController : MonoBehaviour
 
     public bool LoadNextEnv()
     {
-        AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().disableThisEnv();
+     
+            CameraFade.PitchToDark?.Invoke();
+
         CurrentSubSelectionIndex++;
 
         if (CurrentSubSelectionIndex > maxCurrentSubSelectionIndex)
@@ -102,26 +117,24 @@ public class CardController : MonoBehaviour
             CurrentSubSelectionIndex = 0;
             maxCurrentSubSelectionIndex = AllCardsAndThemes[CurrentSelectionIndex].CardDetails.Count - 1;
             ChangeSlectedCards(CurrentSelectionIndex);
-            AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().enableThisEnv();
-            Debug.LogError(AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].PrefabToInstantitate.name);
-
-            // Update environment pool when changing main selection
-            ManageEnvironmentPool();
+            Quest2AssetBundleLoader.Instance.SwitchEnv(AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().GlobalIndex);
+           
+           
             return true;
         }
         else
         {
-            AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().enableThisEnv();
+            Quest2AssetBundleLoader.Instance.SwitchEnv(AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().GlobalIndex);
 
-            // Update environment pool when changing sub-selection
-            ManageEnvironmentPool();
+
             return false;
         }
     }
 
     public bool LoadPrevEnv()
     {
-        AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().disableThisEnv();
+        CameraFade.PitchToDark?.Invoke();
+
         CurrentSubSelectionIndex--;
 
         if (CurrentSubSelectionIndex < 0)
@@ -131,18 +144,17 @@ public class CardController : MonoBehaviour
             CurrentSubSelectionIndex = maxCurrentSubSelectionIndex;
             ChangeSlectedCards(CurrentSelectionIndex);
 
-            AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().enableThisEnv();
+           Quest2AssetBundleLoader.Instance.SwitchEnv( AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().GlobalIndex);
 
-            // Update environment pool when changing main selection
-            ManageEnvironmentPool();
+           
             return true;
         }
         else
         {
-            AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().enableThisEnv();
+            Quest2AssetBundleLoader.Instance.SwitchEnv(AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().GlobalIndex);
 
-            // Update environment pool when changing sub-selection
-            ManageEnvironmentPool();
+
+
             return false;
         }
     }
@@ -150,127 +162,15 @@ public class CardController : MonoBehaviour
     // ENVIRONMENT POOLING SYSTEM
 
     // Get an environment from the pool or instantiate a new one
-    private GameObject GetEnvironmentFromPool(GameObject prefab)
-    {
-        string prefabName = prefab.name;
-
-        // If this type doesn't have a pool queue yet, create one
-        if (!envPool.ContainsKey(prefabName))
-        {
-            envPool[prefabName] = new Queue<GameObject>();
-        }
-
-        // Check if we have an available instance in the pool
-        if (envPool[prefabName].Count > 0)
-        {
-            GameObject pooledEnv = envPool[prefabName].Dequeue();
-            pooledEnv.SetActive(true);
-            return pooledEnv;
-        }
-
-        // If no pooled instance is available, instantiate a new one
-        GameObject newEnv = Instantiate(prefab);
-        return newEnv;
-    }
+   
 
     // Return an environment to the pool (deactivate and queue)
-    private void ReturnEnvironmentToPool(GameObject env)
-    {
-        if (env == null) return;
-
-        string prefabName = env.name.Replace("(Clone)", "").Trim();
-
-        // Make sure we have a queue for this prefab type
-        if (!envPool.ContainsKey(prefabName))
-        {
-            envPool[prefabName] = new Queue<GameObject>();
-        }
-
-        // Deactivate and add to pool
-        env.SetActive(false);
-        envPool[prefabName].Enqueue(env);
-
-        // Remove from active environments
-        if (activeEnvironments.Contains(env))
-        {
-            activeEnvironments.Remove(env);
-        }
-    }
 
     // Get the environment prefab for a specific index
-    private GameObject GetEnvironmentPrefabAt(int selectionIndex, int subSelectionIndex)
-    {
-        // Safety checks
-        if (selectionIndex < 0 || selectionIndex >= AllCardsAndThemes.Count) return null;
-        if (subSelectionIndex < 0 || subSelectionIndex >= AllCardsAndThemes[selectionIndex].CardDetails.Count) return null;
 
-        return AllCardsAndThemes[selectionIndex].CardDetails[subSelectionIndex].PrefabToInstantitate;
-    }
 
     // Manage which environments should be active (current, next, previous)
-    private void ManageEnvironmentPool()
-    {
-        // Step 1: Determine which environments should be active
-        List<(int selIndex, int subIndex)> envsToLoad = new List<(int, int)>();
-
-        // Current environment
-        envsToLoad.Add((CurrentSelectionIndex, CurrentSubSelectionIndex));
-
-        // Next environment
-        int nextSubIndex = CurrentSubSelectionIndex + 1;
-        int nextSelIndex = CurrentSelectionIndex;
-
-        if (nextSubIndex > maxCurrentSubSelectionIndex)
-        {
-            nextSelIndex = (CurrentSelectionIndex + 1) % AllCardsAndThemes.Count;
-            nextSubIndex = 0;
-        }
-
-        envsToLoad.Add((nextSelIndex, nextSubIndex));
-
-        // Previous environment
-        int prevSubIndex = CurrentSubSelectionIndex - 1;
-        int prevSelIndex = CurrentSelectionIndex;
-
-        if (prevSubIndex < 0)
-        {
-            prevSelIndex = (CurrentSelectionIndex - 1 + AllCardsAndThemes.Count) % AllCardsAndThemes.Count;
-            prevSubIndex = AllCardsAndThemes[prevSelIndex].CardDetails.Count - 1;
-        }
-
-        envsToLoad.Add((prevSelIndex, prevSubIndex));
-
-        // Step 2: Return all current active environments to pool
-        foreach (var env in activeEnvironments.ToList())
-        {
-            ReturnEnvironmentToPool(env);
-        }
-
-        activeEnvironments.Clear();
-
-        // Step 3: Load and activate the needed environments
-        foreach (var (selIndex, subIndex) in envsToLoad)
-        {
-            // Get the prefab to instantiate
-            GameObject prefab = GetEnvironmentPrefabAt(selIndex, subIndex);
-            if (prefab == null) continue;
-
-            // Get from pool or instantiate
-            GameObject instance = GetEnvironmentFromPool(prefab);
-
-            // Only activate the current environment - keep others ready but inactive
-            if (selIndex == CurrentSelectionIndex && subIndex == CurrentSubSelectionIndex)
-            {
-                instance.SetActive(true);
-            }
-            else
-            {
-                instance.SetActive(false);
-            }
-
-            activeEnvironments.Add(instance);
-        }
-    }
+  
 }
 
 [System.Serializable]
