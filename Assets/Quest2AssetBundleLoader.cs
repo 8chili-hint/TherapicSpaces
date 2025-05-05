@@ -167,7 +167,7 @@ public class Quest2AssetBundleLoader : MonoBehaviour
     {
      
         globalIndex = GlobalIndex;
-      //  StartCoroutine(SwitchEnvironment(GlobalIndex));
+        StartCoroutine(SwitchEnvironment(GlobalIndex));
     }
  
     IEnumerator SwitchEnvironment(int newIndex)
