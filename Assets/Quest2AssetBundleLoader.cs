@@ -30,6 +30,10 @@ public class Quest2AssetBundleLoader : MonoBehaviour
 
     public static Quest2AssetBundleLoader Instance;
 
+    public int globalIndex;
+
+    public List<QueueStruct> Queue = new();
+
     void Awake()
     {
         Instance = this;
@@ -57,7 +61,7 @@ public class Quest2AssetBundleLoader : MonoBehaviour
         for (int i = 0; i < AssetBundleNames.Count; i++)
         {
             string bundleName = AssetBundleNames[i];
-            string bundlePath =  Path.Combine(Application.streamingAssetsPath , bundleName);
+            string bundlePath = Path.Combine(Application.streamingAssetsPath, bundleName);
             AssetBundlePaths.Add(bundlePath); // Store the file:// path
 
         }
@@ -65,18 +69,18 @@ public class Quest2AssetBundleLoader : MonoBehaviour
 
     IEnumerator LoadEnvironment(int index)
     {
-        
+
 
         CurrIndex = index;
         string bundlePath = AssetBundlePaths[index];
 
         // Load the asset bundle
         LogMessage("Loading environment from: " + bundlePath);
-        UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(bundlePath); 
+        UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(bundlePath);
         yield return request.SendWebRequest();
 
         AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(request);
-        yield return null; 
+        yield return null;
 
         if (bundle != null) // Changed to check if the bundle is valid
         {
@@ -103,11 +107,67 @@ public class Quest2AssetBundleLoader : MonoBehaviour
             if (FailedPrefab) FailedPrefab.SetActive(true);
         }
     }
+    public IEnumerator InitiateQueue(int index, int maxindex)
+    {
+        Queue.Clear();
+        if (index == 0)
+        {
+            //forPreviousOne
+            {
 
+                QueueStruct a;
+                a.GlobalIndex = index - 1;
+                string bundlePath = AssetBundlePaths[a.GlobalIndex];
+                UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(bundlePath);
+                yield return request.SendWebRequest();
+
+                AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(request);
+                yield return null;
+
+                if (bundle != null) // Changed to check if the bundle is valid
+                {
+                    loadedBundles.Add(bundle);
+                    GameObject assetBundlePrefab = (GameObject)bundle.LoadAsset(AssetBundleNames[index]);
+                    a.PrefabInstantialted = Instantiate(assetBundlePrefab);
+                    a.PrefabInstantialted.transform.position = (Vector3.zero);
+
+
+
+                }
+            }
+            //ForSelected
+
+            {
+
+                QueueStruct a;
+                a.GlobalIndex = index - 1;
+                string bundlePath = AssetBundlePaths[a.GlobalIndex];
+                UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(bundlePath);
+                yield return request.SendWebRequest();
+
+                AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(request);
+                yield return null;
+
+                if (bundle != null) // Changed to check if the bundle is valid
+                {
+                    loadedBundles.Add(bundle);
+                    GameObject assetBundlePrefab = (GameObject)bundle.LoadAsset(AssetBundleNames[index]);
+                    a.PrefabInstantialted = Instantiate(assetBundlePrefab);
+                    a.PrefabInstantialted.transform.position = (Vector3.zero);
+
+
+
+                }
+            }
+        }
+
+    }
    
     public void SwitchEnv(int GlobalIndex)
     {
-        StartCoroutine(SwitchEnvironment(GlobalIndex));
+     
+        globalIndex = GlobalIndex;
+      //  StartCoroutine(SwitchEnvironment(GlobalIndex));
     }
  
     IEnumerator SwitchEnvironment(int newIndex)
@@ -147,3 +207,9 @@ public class Quest2AssetBundleLoader : MonoBehaviour
     }
 }
 
+public struct QueueStruct
+{
+    public AssetBundle bundle;
+    public Index GlobalIndex;
+    public GameObject PrefabInstantialted;
+}

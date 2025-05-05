@@ -59,8 +59,8 @@ public class CardController : MonoBehaviour
     public void ChangeSlectedCards(int Index)
     {
         CurrentSelectionIndex = Index;
-        CurrentSubSelectionIndex = 0;
-        maxCurrentSubSelectionIndex = AllCardsAndThemes[CurrentSelectionIndex].CardDetails.Count - 1;
+      /*  CurrentSubSelectionIndex = 0;*/
+      //  maxCurrentSubSelectionIndex = AllCardsAndThemes[CurrentSelectionIndex].CardDetails.Count - 1;
         FindAnyObjectByType<Uicontroller>().UpdateMaxIndex(AllCardsAndThemes[CurrentSelectionIndex].CardDetails.Count);
 
         SelectedCards.Clear(); // Clear previous selected cards
@@ -107,7 +107,7 @@ public class CardController : MonoBehaviour
     public bool LoadNextEnv()
     {
      
-            CameraFade.PitchToDark?.Invoke();
+       //     CameraFade.PitchToDark?.Invoke();
 
         CurrentSubSelectionIndex++;
 
@@ -115,54 +115,60 @@ public class CardController : MonoBehaviour
         {
             CurrentSelectionIndex = FindAnyObjectByType<Uicontroller>().IncrementMainUIIndex(CurrentSelectionIndex);
             CurrentSubSelectionIndex = 0;
-            maxCurrentSubSelectionIndex = AllCardsAndThemes[CurrentSelectionIndex].CardDetails.Count - 1;
+            maxCurrentSubSelectionIndex = AllCardsAndThemes[CurrentSelectionIndex].CardDetails.Count-1 ;
             ChangeSlectedCards(CurrentSelectionIndex);
             Quest2AssetBundleLoader.Instance.SwitchEnv(AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().GlobalIndex);
-           
-           
+
+
             return true;
         }
         else
         {
             Quest2AssetBundleLoader.Instance.SwitchEnv(AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().GlobalIndex);
 
-
             return false;
         }
+
+
     }
 
     public bool LoadPrevEnv()
     {
-        CameraFade.PitchToDark?.Invoke();
+     //   CameraFade.PitchToDark?.Invoke();
 
         CurrentSubSelectionIndex--;
 
         if (CurrentSubSelectionIndex < 0)
         {
             CurrentSelectionIndex = FindAnyObjectByType<Uicontroller>().decrementMainUIIndex(CurrentSelectionIndex);
-            maxCurrentSubSelectionIndex = AllCardsAndThemes[CurrentSelectionIndex].CardDetails.Count - 1;
+            maxCurrentSubSelectionIndex = AllCardsAndThemes[CurrentSelectionIndex].CardDetails.Count-1;
             CurrentSubSelectionIndex = maxCurrentSubSelectionIndex;
             ChangeSlectedCards(CurrentSelectionIndex);
 
-           Quest2AssetBundleLoader.Instance.SwitchEnv( AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().GlobalIndex);
+             Quest2AssetBundleLoader.Instance.SwitchEnv( AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().GlobalIndex);
 
-           
+
             return true;
         }
         else
         {
+
+
             Quest2AssetBundleLoader.Instance.SwitchEnv(AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().GlobalIndex);
 
 
 
             return false;
         }
+
+        //return true;
+
     }
 
     // ENVIRONMENT POOLING SYSTEM
 
     // Get an environment from the pool or instantiate a new one
-   
+
 
     // Return an environment to the pool (deactivate and queue)
 
@@ -170,7 +176,7 @@ public class CardController : MonoBehaviour
 
 
     // Manage which environments should be active (current, next, previous)
-  
+
 }
 
 [System.Serializable]

@@ -44,48 +44,12 @@ public class Uicontroller : MonoBehaviour
         SelectionMenuPanelButtons[menuIndex].OnPointerEnter(null);
         CameraFade.FadeInComplete += (() => { if (EnteredScene) { if (LoadPrevScene) { { CardController.Instance.LoadPrevEnv(); } } else { CardController.Instance.LoadNextEnv(); } } });
     }
-
-
-   public void OnJoystickRight()
-    {
-        if (!DisableRightStick)
-        {
-            if (!EnteredScene)
-            {
-                menuIndex++;
-                if (isMenuLooping)
-                {
-                    if (menuIndex > maxIndex - 1)
-                    {
-                        menuIndex = 0;
-                    }
-                }
-                else
-                {
-                    if (menuIndex > maxIndex - 1)
-                    {
-                        menuIndex = maxIndex - 1;
-                    }
-                }
-                HoverOnMenuItem();
-            }
-            else
-            {
-                CameraFade.PitchToDark?.Invoke();
-                SoundClipPlayer.Instance.PlayChangeSceneSound();
-
-                LoadPrevScene = false;
-                CameraFade.FadeInComplete?.Invoke();
-            }
-        }
-        
-    }
-
     [ContextMenu("GoBack")]
     public void GobackToMainMenu()
     {
-        
+
         menuIndex = 0;
+        maxIndex = SelectionMenuPanelButtons.Count;
         menuSelected = false;
         EnteredScene = false;
         DisableRightStick = false;
@@ -124,8 +88,46 @@ public class Uicontroller : MonoBehaviour
         SelectionMenuPanelButtons[menuIndex].OnPointerEnter(null);
     }
 
+    public void OnJoystickRight()
+    {
+        if (!DisableRightStick)
+        {
+            if (!EnteredScene)
+            {
+                menuIndex++;
+                if (isMenuLooping)
+                {
+                    if (menuIndex > maxIndex - 1)
+                    {
+                        menuIndex = 0;
+                    }
+                }
+                else
+                {
+                    if (menuIndex > maxIndex - 1)
+                    {
+                        menuIndex = maxIndex - 1;
+                    }
+                }
+                HoverOnMenuItem();
+            }
+            else
+            {
+                CameraFade.PitchToDark?.Invoke();
+                SoundClipPlayer.Instance.PlayChangeSceneSound();
+
+                LoadPrevScene = false;
+                CameraFade.FadeInComplete?.Invoke();
+            }
+        }
+        
+    }
+
+  
+
     public void OnJoystickLeft()
     {
+
         if (!DisableRightStick)
         {
             if (!EnteredScene)
@@ -153,9 +155,10 @@ public class Uicontroller : MonoBehaviour
             {
                 CameraFade.PitchToDark?.Invoke();
                 SoundClipPlayer.Instance.PlayChangeSceneSound();
+                LoadPrevScene = true;
                 CameraFade.FadeInComplete?.Invoke();
 
-                LoadPrevScene = true;
+             
             }
         }
      
@@ -226,7 +229,7 @@ public class Uicontroller : MonoBehaviour
 
         if (isMenuLooping)
         {
-            if (menuIndex > maxIndex - 1)
+            if (menuIndex > maxIndex )
             {
                 menuIndex = 0;
                
@@ -234,9 +237,9 @@ public class Uicontroller : MonoBehaviour
         }
         else
         {
-            if (menuIndex > maxIndex - 1)
+            if (menuIndex > maxIndex )
             {
-                menuIndex = maxIndex - 1;
+                menuIndex = maxIndex ;
             }
         }
 
@@ -252,7 +255,7 @@ public class Uicontroller : MonoBehaviour
             {
                 if (menuIndex < 0)
                 {
-                    menuIndex = maxIndex - 1;
+                    menuIndex = maxIndex ;
                 }
             }
 
