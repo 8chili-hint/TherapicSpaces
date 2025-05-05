@@ -18,6 +18,8 @@ public class Card : MonoBehaviour
         nameText.text = name;
         subNameText.text = subText;
         GetComponent<Button>().onClick.AddListener(() => {
+
+          //  StartCoroutine(Quest2AssetBundleLoader.Instance.InitiateQueue(GlobalIndex));
             Quest2AssetBundleLoader.Instance.SwitchEnv(GlobalIndex);
         });
         

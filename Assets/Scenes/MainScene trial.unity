@@ -20210,9 +20210,9 @@ MonoBehaviour:
   - magical_29
   spawnPoint: {x: 0, y: 0, z: 0}
   FailedPrefab: {fileID: 0}
-  DonePrefab: {fileID: 0}
+  LoadedEnvs: []
+  Queue: []
   verbose: 1
-  globalIndex: 0
 --- !u!1 &1995010553
 GameObject:
   m_ObjectHideFlags: 0

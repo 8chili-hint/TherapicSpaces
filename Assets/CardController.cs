@@ -24,7 +24,7 @@ public class CardController : MonoBehaviour
     private List<GameObject> activeEnvironments = new List<GameObject>();
     // Max number of environments to keep loaded at a time (current + next + previous)
     private const int MAX_ACTIVE_ENVIRONMENTS = 3;
-
+    
     private void Awake()
     {
         Instance = this;
@@ -118,7 +118,7 @@ public class CardController : MonoBehaviour
             maxCurrentSubSelectionIndex = AllCardsAndThemes[CurrentSelectionIndex].CardDetails.Count-1 ;
             ChangeSlectedCards(CurrentSelectionIndex);
             Quest2AssetBundleLoader.Instance.SwitchEnv(AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().GlobalIndex);
-
+          
 
             return true;
         }

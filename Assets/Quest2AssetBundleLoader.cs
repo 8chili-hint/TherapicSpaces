@@ -1,54 +1,41 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
-using System.IO;
-using Better.StreamingAssets;
-using System.Linq;
-using System;
-using UnityEngine.Scripting; // Add the BetterStreamingAssets namespace
 
 public class Quest2AssetBundleLoader : MonoBehaviour
 {
     public List<string> AssetBundleNames;
     public Vector3 spawnPoint;
-    public GameObject PrevEnv { get; private set; }
-    public GameObject CurrEnv { get; private set; }
-    public GameObject NextEnv { get; private set; }
-    private List<AssetBundle> loadedBundles = new List<AssetBundle>();
-    private List<GameObject> LoadedEnvs = new();
-    public List<string> AssetBundlePaths { get; private set; }
+    public GameObject FailedPrefab;
 
-    private int CurrIndex = 0;
-    private int PrevIndex = 0;
-    private int NextIndex = 0;
-
-    public GameObject FailedPrefab, DonePrefab;
-
-    // Debug toggle
-    public bool verbose = true;
+    public List<GameObject> LoadedEnvs = new();
+    public List<QueueStruct> Queue = new();
+    private List<AssetBundle> loadedBundles = new();
 
     public static Quest2AssetBundleLoader Instance;
 
-    public int globalIndex;
+    private int globalIndex = 0;
+    private const int MaxQueueSize = 3; // Keep this at 3
+    private int previousIndex = -1;
 
-    public List<QueueStruct> Queue = new();
+    public bool verbose = true;
+
+    public List<string> AssetBundlePaths { get; private set; }
 
     void Awake()
     {
         Instance = this;
         AssetBundlePaths = new List<string>();
         if (spawnPoint == Vector3.zero)
-        {
             spawnPoint = transform.position;
-        }
-        // Initialize Better Streaming Assets
         BetterStreamingAssets.Initialize();
     }
 
     void Start()
     {
-        // Start the loading process
         StartCoroutine(GetAllFilePaths());
     }
 
@@ -56,160 +43,188 @@ public class Quest2AssetBundleLoader : MonoBehaviour
     {
         yield return null;
         LogMessage("Starting Quest2AssetBundleLoader...");
-
-        // Process each asset bundle name
         for (int i = 0; i < AssetBundleNames.Count; i++)
         {
-            string bundleName = AssetBundleNames[i];
-            string bundlePath = Path.Combine(Application.streamingAssetsPath, bundleName);
-            AssetBundlePaths.Add(bundlePath); // Store the file:// path
+            string bundlePath = Path.Combine(Application.streamingAssetsPath, AssetBundleNames[i]);
+            AssetBundlePaths.Add(bundlePath);
+        }
+        //yield return StartCoroutine(LoadEnvironment(0)); // Load initial index
+    }
 
+    public void SwitchEnv(int newIndex)
+    {
+       // if (newIndex == globalIndex) return;
+
+        previousIndex = globalIndex; // Store the previous index
+        globalIndex = newIndex;
+        StartCoroutine(UpdateEnvironmentQueue());
+    }
+
+    IEnumerator UpdateEnvironmentQueue()
+    {
+        LogMessage($"UpdateEnvironmentQueue started, newIndex: {globalIndex}, previousIndex: {previousIndex}");
+
+        // Calculate indices for previous and next environments
+        int prevIndex = (globalIndex - 1 + AssetBundleNames.Count) % AssetBundleNames.Count;
+        int nextIndex = (globalIndex + 1) % AssetBundleNames.Count;
+
+        // Ensure queue doesn't contain duplicates.
+        Queue.RemoveAll(item => item.GlobalIndex == globalIndex || item.GlobalIndex == prevIndex || item.GlobalIndex == nextIndex);
+
+
+        // Load the new central environment
+        yield return StartCoroutine(LoadEnvironment(globalIndex));
+
+        // Load the previous and next environments
+        yield return StartCoroutine(LoadEnvironment(prevIndex));
+        yield return StartCoroutine(LoadEnvironment(nextIndex));
+
+        //Re-order Queue
+        Queue.Sort((a, b) =>
+        {
+            if (a.GlobalIndex == globalIndex) return -1;
+            if (b.GlobalIndex == globalIndex) return 1;
+            if (a.GlobalIndex == prevIndex) return -1;
+            if (b.GlobalIndex == prevIndex) return 1;
+            return 0;
+        });
+        LogMessage("Queue sorted");
+
+        // Deactivate environments that are not the current or adjacent
+        foreach (var env in Queue)
+        {
+            if (env.PrefabInstantialted != null && env.GlobalIndex != globalIndex && env.GlobalIndex != prevIndex && env.GlobalIndex != nextIndex)
+            {
+                env.PrefabInstantialted.SetActive(false);
+            }
+            else if (env.PrefabInstantialted != null)
+            {
+                env.PrefabInstantialted.SetActive(true); //make the current and adjacent active
+            }
         }
     }
 
     IEnumerator LoadEnvironment(int index)
     {
+        LogMessage($"LoadEnvironment started for index: {index}");
 
+        // Check if already in queue
+        QueueStruct? existing = null;
+        foreach (var item in Queue)
+        {
+            if (item.GlobalIndex == index)
+            {
+                existing = item;
+                break; // Important: Exit the loop when found!
+            }
+        }
 
-        CurrIndex = index;
-        string bundlePath = AssetBundlePaths[index];
+        if (existing.HasValue)
+        {
+            LogMessage($"Environment found in queue, index: {index}");
+            // ... (Code to show the existing environment)
+            yield break;
+        }
+        // Queue shift (remove first if full)
+        if (Queue.Count >= MaxQueueSize)
+        {
+            LogMessage($"Queue is full, removing oldest entry");
+            var toRemove = Queue[0];
+            Queue.RemoveAt(0);
 
-        // Load the asset bundle
-        LogMessage("Loading environment from: " + bundlePath);
-        UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(bundlePath);
+            if (toRemove.PrefabInstantialted != null)
+            {
+                Destroy(toRemove.PrefabInstantialted);
+            }
+            if (toRemove.bundle != null)
+            {
+                toRemove.bundle.Unload(true);
+            }
+        }
+
+        // Async Load
+        string path = AssetBundlePaths[index];
+        LogMessage($"Loading AssetBundle from: {path}");
+        UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(path);
         yield return request.SendWebRequest();
 
+        if (request.result != UnityWebRequest.Result.Success)
+        {
+            LogError("Failed to load AssetBundle at: " + path + " Error: " + request.error);
+            if (FailedPrefab)
+            {
+                GameObject failedInstance = Instantiate(FailedPrefab, spawnPoint, Quaternion.identity);
+                yield return new WaitForSeconds(5);
+                Destroy(failedInstance);
+            }
+            yield break;
+        }
+
         AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(request);
-        yield return null;
+        loadedBundles.Add(bundle);
+        LogMessage($"AssetBundle loaded successfully.");
 
-        if (bundle != null) // Changed to check if the bundle is valid
+        AssetBundleRequest asyncRequest = bundle.LoadAssetAsync<GameObject>(AssetBundleNames[index]);
+        yield return asyncRequest;
+
+        GameObject prefab = asyncRequest.asset as GameObject;
+        if (!prefab)
         {
-            loadedBundles.Add(bundle);
-            GameObject a = (GameObject)bundle.LoadAsset(AssetBundleNames[index]);
-            if (a)
-            {
-                var b = Instantiate(a);
-                b.transform.position = (Vector3.zero);
-                b.SetActive(true);
-                LoadedEnvs.Add(b);
-                CameraFade.PitchToLight?.Invoke();
-                Uicontroller.DisableRightStick = false;
-            }
-            else
-            {
-                Uicontroller.DisableRightStick = false;
-                FindAnyObjectByType<Uicontroller>().OnJoystickRight();
-            }
-        }
-        else
-        {
-            LogError("Failed to load environment: " + bundlePath);
-            if (FailedPrefab) FailedPrefab.SetActive(true);
-        }
-    }
-    public IEnumerator InitiateQueue(int index, int maxindex)
-    {
-        Queue.Clear();
-        if (index == 0)
-        {
-            //forPreviousOne
-            {
-
-                QueueStruct a;
-                a.GlobalIndex = index - 1;
-                string bundlePath = AssetBundlePaths[a.GlobalIndex];
-                UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(bundlePath);
-                yield return request.SendWebRequest();
-
-                AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(request);
-                yield return null;
-
-                if (bundle != null) // Changed to check if the bundle is valid
-                {
-                    loadedBundles.Add(bundle);
-                    GameObject assetBundlePrefab = (GameObject)bundle.LoadAsset(AssetBundleNames[index]);
-                    a.PrefabInstantialted = Instantiate(assetBundlePrefab);
-                    a.PrefabInstantialted.transform.position = (Vector3.zero);
-
-
-
-                }
-            }
-            //ForSelected
-
-            {
-
-                QueueStruct a;
-                a.GlobalIndex = index - 1;
-                string bundlePath = AssetBundlePaths[a.GlobalIndex];
-                UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(bundlePath);
-                yield return request.SendWebRequest();
-
-                AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(request);
-                yield return null;
-
-                if (bundle != null) // Changed to check if the bundle is valid
-                {
-                    loadedBundles.Add(bundle);
-                    GameObject assetBundlePrefab = (GameObject)bundle.LoadAsset(AssetBundleNames[index]);
-                    a.PrefabInstantialted = Instantiate(assetBundlePrefab);
-                    a.PrefabInstantialted.transform.position = (Vector3.zero);
-
-
-
-                }
-            }
+            LogError("Failed to load prefab from bundle: " + AssetBundleNames[index]);
+            yield break;
         }
 
-    }
-   
-    public void SwitchEnv(int GlobalIndex)
-    {
-     
-        globalIndex = GlobalIndex;
-        StartCoroutine(SwitchEnvironment(GlobalIndex));
-    }
- 
-    IEnumerator SwitchEnvironment(int newIndex)
-    {
-        Uicontroller.DisableRightStick = true;
-        // Clean up current environment
-        UnloadEnvironments();
+        // Instantiate on main thread
+        GameObject instance = Instantiate(prefab, spawnPoint, Quaternion.identity);
+        instance.SetActive(true);
+        LoadedEnvs.Add(instance);
 
-        // Load the new one
-        yield return StartCoroutine(LoadEnvironment(newIndex));
+
+        Queue.Add(new QueueStruct
+        {
+            GlobalIndex = index,
+            bundle = bundle,
+            PrefabInstantialted = instance
+        });
+
+        LogMessage("Environment Loaded and Instantiated: " + index);
     }
 
     public void UnloadEnvironments()
     {
-        foreach(GameObject a in LoadedEnvs)
+        foreach (GameObject obj in LoadedEnvs)
         {
-            Destroy(a);
+            Destroy(obj);
         }
-        CurrEnv = null;
-       
+        LoadedEnvs.Clear();
+        Queue.Clear();
     }
 
     void OnDestroy()
     {
         UnloadEnvironments();
+        foreach (var bundle in loadedBundles)
+        {
+            bundle?.Unload(true);
+        }
+        loadedBundles.Clear();
     }
 
-    // Logging helpers
-    void LogMessage(string message)
+    void LogMessage(string msg)
     {
-        if (verbose) Debug.Log("[Quest2AssetBundleLoader] " + message);
+        if (verbose) Debug.Log("[Quest2AssetBundleLoader] " + msg);
     }
 
-    void LogError(string message)
+    void LogError(string msg)
     {
-        Debug.LogError("[Quest2AssetBundleLoader] " + message);
+        Debug.LogError("[Quest2AssetBundleLoader] " + msg);
     }
 }
 
+[Serializable]
 public struct QueueStruct
 {
     public AssetBundle bundle;
-    public Index GlobalIndex;
+    public int GlobalIndex;
     public GameObject PrefabInstantialted;
 }
