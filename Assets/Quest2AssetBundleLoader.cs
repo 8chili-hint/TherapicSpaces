@@ -51,16 +51,17 @@ public class Quest2AssetBundleLoader : MonoBehaviour
         //yield return StartCoroutine(LoadEnvironment(0)); // Load initial index
     }
 
-    public void SwitchEnv(int newIndex)
+    public void SwitchEnv(int newIndex,bool IsGoingPrev)
     {
-       // if (newIndex == globalIndex) return;
+        // if (newIndex == globalIndex) return;
+      Uicontroller.Instance. SetActiveJoystick(true);
 
         previousIndex = globalIndex; // Store the previous index
         globalIndex = newIndex;
-        StartCoroutine(UpdateEnvironmentQueue());
+        StartCoroutine(UpdateEnvironmentQueue(IsGoingPrev));
     }
 
-    IEnumerator UpdateEnvironmentQueue()
+    IEnumerator UpdateEnvironmentQueue(bool IsGoingPrev)
     {
         LogMessage($"UpdateEnvironmentQueue started, newIndex: {globalIndex}, previousIndex: {previousIndex}");
 
@@ -69,77 +70,129 @@ public class Quest2AssetBundleLoader : MonoBehaviour
         int nextIndex = (globalIndex + 1) % AssetBundleNames.Count;
 
         // Ensure queue doesn't contain duplicates.
-        Queue.RemoveAll(item => item.GlobalIndex == globalIndex || item.GlobalIndex == prevIndex || item.GlobalIndex == nextIndex);
+       // Queue.RemoveAll(item => item.GlobalIndex == globalIndex || item.GlobalIndex == prevIndex || item.GlobalIndex == nextIndex);
 
 
         // Load the new central environment
-        yield return StartCoroutine(LoadEnvironment(globalIndex));
+        yield return StartCoroutine(LoadEnvironment(globalIndex,true, IsGoingPrev));
 
         // Load the previous and next environments
-        yield return StartCoroutine(LoadEnvironment(prevIndex));
-        yield return StartCoroutine(LoadEnvironment(nextIndex));
+        yield return StartCoroutine(LoadEnvironment(prevIndex, false, IsGoingPrev));
+        yield return StartCoroutine(LoadEnvironment(nextIndex, false, IsGoingPrev));
 
         //Re-order Queue
-        Queue.Sort((a, b) =>
+        if (Queue.Count > 1)
         {
-            if (a.GlobalIndex == globalIndex) return -1;
-            if (b.GlobalIndex == globalIndex) return 1;
-            if (a.GlobalIndex == prevIndex) return -1;
-            if (b.GlobalIndex == prevIndex) return 1;
-            return 0;
-        });
-        LogMessage("Queue sorted");
+            QueueStruct[] tempArray = Queue.ToArray(); // Convert to array for easier manipulation.
 
-        // Deactivate environments that are not the current or adjacent
-        foreach (var env in Queue)
-        {
-            if (env.PrefabInstantialted != null && env.GlobalIndex != globalIndex && env.GlobalIndex != prevIndex && env.GlobalIndex != nextIndex)
+            for (int i = 0; i < Queue.Count - 1; i++)
             {
-                env.PrefabInstantialted.SetActive(false);
+                for (int j = i + 1; j < Queue.Count; j++)
+                {
+                    if (tempArray[i].GlobalIndex > tempArray[j].GlobalIndex)
+                    {
+                        // Swap elements
+                        QueueStruct temp = tempArray[i];
+                        tempArray[i] = tempArray[j];
+                        tempArray[j] = temp;
+                    }
+                }
             }
-            else if (env.PrefabInstantialted != null)
+
+            Queue.Clear(); // Clear the original queue.
+            foreach (QueueStruct item in tempArray)
             {
-                env.PrefabInstantialted.SetActive(true); //make the current and adjacent active
+                if(item.GlobalIndex == prevIndex)
+                {
+                    item.PrefabInstantialted.SetActive(false);
+                Queue.Add(item); // Enqueue the sorted elements back into the queue.
+                }
+            }
+            foreach (QueueStruct item in tempArray)
+            {
+                if (item.GlobalIndex == globalIndex)
+                {
+                    item.PrefabInstantialted.SetActive(true);
+
+                    Queue.Add(item); // Enqueue the sorted elements back into the queue.
+                }
+            }
+            foreach (QueueStruct item in tempArray)
+            {
+                if (item.GlobalIndex == nextIndex)
+                {
+                    item.PrefabInstantialted.SetActive(false);
+
+                    Queue.Add(item); // Enqueue the sorted elements back into the queue.
+                }
             }
         }
+        LogMessage("Queue sorted");
+
+        Uicontroller.Instance.SetActiveJoystick(false);
+        CameraFade.PitchToLight?.Invoke();
     }
 
-    IEnumerator LoadEnvironment(int index)
+    IEnumerator LoadEnvironment(int index, bool enable, bool isprev)
     {
         LogMessage($"LoadEnvironment started for index: {index}");
 
         // Check if already in queue
-        QueueStruct? existing = null;
+        QueueStruct existing;
         foreach (var item in Queue)
         {
             if (item.GlobalIndex == index)
             {
                 existing = item;
+                if (existing.PrefabInstantialted)
+                {
+                  //  existing.PrefabInstantialted.SetActive(true);
+                    yield break;
+                }
                 break; // Important: Exit the loop when found!
             }
+            else
+            {
+                existing = item;
+            }
         }
+     
 
-        if (existing.HasValue)
-        {
-            LogMessage($"Environment found in queue, index: {index}");
-            // ... (Code to show the existing environment)
-            yield break;
-        }
+
         // Queue shift (remove first if full)
         if (Queue.Count >= MaxQueueSize)
         {
-            LogMessage($"Queue is full, removing oldest entry");
-            var toRemove = Queue[0];
-            Queue.RemoveAt(0);
+            if (isprev)
+            {
+                LogMessage($"Queue is full, removing oldest entry");
+                var toRemove = Queue[Queue.Count-1];
+                Queue.RemoveAt(Queue.Count - 1);
 
-            if (toRemove.PrefabInstantialted != null)
-            {
-                Destroy(toRemove.PrefabInstantialted);
+                if (toRemove.PrefabInstantialted != null)
+                {
+                    Destroy(toRemove.PrefabInstantialted);
+                }
+                if (toRemove.bundle != null)
+                {
+                    toRemove.bundle.Unload(true);
+                }
             }
-            if (toRemove.bundle != null)
+            else
             {
-                toRemove.bundle.Unload(true);
+                LogMessage($"Queue is full, removing oldest entry");
+                var toRemove = Queue[0];
+                Queue.RemoveAt(0);
+
+                if (toRemove.PrefabInstantialted != null)
+                {
+                    Destroy(toRemove.PrefabInstantialted);
+                }
+                if (toRemove.bundle != null)
+                {
+                    toRemove.bundle.Unload(true);
+                }
             }
+           
         }
 
         // Async Load
@@ -153,11 +206,14 @@ public class Quest2AssetBundleLoader : MonoBehaviour
             LogError("Failed to load AssetBundle at: " + path + " Error: " + request.error);
             if (FailedPrefab)
             {
-                GameObject failedInstance = Instantiate(FailedPrefab, spawnPoint, Quaternion.identity);
-                yield return new WaitForSeconds(5);
-                Destroy(failedInstance);
+            //Falback To 1st
+                path = AssetBundlePaths[0];
+                LogMessage($"Loading AssetBundle from: {path}");
+                 request = UnityWebRequestAssetBundle.GetAssetBundle(path);
+                yield return request.SendWebRequest();
+
             }
-            yield break;
+         
         }
 
         AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(request);
@@ -170,13 +226,30 @@ public class Quest2AssetBundleLoader : MonoBehaviour
         GameObject prefab = asyncRequest.asset as GameObject;
         if (!prefab)
         {
-            LogError("Failed to load prefab from bundle: " + AssetBundleNames[index]);
-            yield break;
+            //Falback To 1st
+            path = AssetBundlePaths[0];
+            LogMessage($"Loading AssetBundle from: {path}");
+            request = UnityWebRequestAssetBundle.GetAssetBundle(path);
+            yield return request.SendWebRequest();
+
+
+             bundle = DownloadHandlerAssetBundle.GetContent(request);
+            loadedBundles.Add(bundle);
+            LogMessage($"AssetBundle loaded successfully.");
+
+             asyncRequest = bundle.LoadAssetAsync<GameObject>(AssetBundleNames[0]);
+            yield return asyncRequest;
+
+             prefab = asyncRequest.asset as GameObject;
+            
         }
 
         // Instantiate on main thread
         GameObject instance = Instantiate(prefab, spawnPoint, Quaternion.identity);
-        instance.SetActive(true);
+        if (enable) 
+        {
+            instance.SetActive(true);
+        } 
         LoadedEnvs.Add(instance);
 
 
@@ -192,11 +265,11 @@ public class Quest2AssetBundleLoader : MonoBehaviour
 
     public void UnloadEnvironments()
     {
-        foreach (GameObject obj in LoadedEnvs)
-        {
-            Destroy(obj);
-        }
         LoadedEnvs.Clear();
+        foreach (var obj in Queue)
+        {
+            Destroy(obj.PrefabInstantialted);
+        }     
         Queue.Clear();
     }
 

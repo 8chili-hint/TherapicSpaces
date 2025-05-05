@@ -23,15 +23,21 @@ public class Uicontroller : MonoBehaviour
    public bool EnteredScene;
 
     public bool LoadPrevScene;
-    public static bool DisableRightStick;
+    public  bool DisableRightStick;
 
+    public static Uicontroller Instance;
     private void Awake()
     {
+        Instance = this;
         maxIndex =  SelectionMenuPanelButtons.Count;
         menuIndex = 0;
     }
-
-
+   
+    public void SetActiveJoystick(bool a)
+    {
+        DisableRightStick = a;
+        Debug.Log("Value of RightStick is " + DisableRightStick);
+    }
     private void Start()
     {
       
@@ -42,17 +48,16 @@ public class Uicontroller : MonoBehaviour
           
         }
         SelectionMenuPanelButtons[menuIndex].OnPointerEnter(null);
-        CameraFade.FadeInComplete += (() => { if (EnteredScene) { if (LoadPrevScene) { { CardController.Instance.LoadPrevEnv(); } } else { CardController.Instance.LoadNextEnv(); } } });
+        CameraFade.FadeInComplete += (() => { if (EnteredScene) { if (LoadPrevScene) { { CardController.Instance.LoadPrevEnv();  } } else { CardController.Instance.LoadNextEnv(); } } });
     }
     [ContextMenu("GoBack")]
     public void GobackToMainMenu()
     {
-
+        SetActiveJoystick(true);
         menuIndex = 0;
         maxIndex = SelectionMenuPanelButtons.Count;
         menuSelected = false;
         EnteredScene = false;
-        DisableRightStick = false;
         MainPanel.GetComponent<CanvasGroup>().alpha = 1;
       //  MainPanel.SetActive(true);
         SubPanel.SetActive(false);
@@ -86,6 +91,9 @@ public class Uicontroller : MonoBehaviour
             button.GetComponent<Animator>().SetTrigger("Normal");
         }
         SelectionMenuPanelButtons[menuIndex].OnPointerEnter(null);
+
+
+        DisableRightStick = false;
     }
 
     public void OnJoystickRight()
@@ -118,6 +126,7 @@ public class Uicontroller : MonoBehaviour
 
                 LoadPrevScene = false;
                 CameraFade.FadeInComplete?.Invoke();
+                
             }
         }
         
@@ -158,7 +167,8 @@ public class Uicontroller : MonoBehaviour
                 LoadPrevScene = true;
                 CameraFade.FadeInComplete?.Invoke();
 
-             
+               
+
             }
         }
      
@@ -242,7 +252,7 @@ public class Uicontroller : MonoBehaviour
                 menuIndex = maxIndex ;
             }
         }
-
+      //  SetActiveJoystick(false);
         return menuIndex;
     }
 
@@ -267,7 +277,8 @@ public class Uicontroller : MonoBehaviour
                     menuIndex = 0;
                 }
             }
-        
+       // SetActiveJoystick(false);
+
         return menuIndex;
     }
 

@@ -20,7 +20,9 @@ public class Card : MonoBehaviour
         GetComponent<Button>().onClick.AddListener(() => {
 
           //  StartCoroutine(Quest2AssetBundleLoader.Instance.InitiateQueue(GlobalIndex));
-            Quest2AssetBundleLoader.Instance.SwitchEnv(GlobalIndex);
+            Quest2AssetBundleLoader.Instance.SwitchEnv(GlobalIndex,false);
+          
+
         });
         
        

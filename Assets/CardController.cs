@@ -60,7 +60,7 @@ public class CardController : MonoBehaviour
     {
         CurrentSelectionIndex = Index;
       /*  CurrentSubSelectionIndex = 0;*/
-      //  maxCurrentSubSelectionIndex = AllCardsAndThemes[CurrentSelectionIndex].CardDetails.Count - 1;
+        maxCurrentSubSelectionIndex = AllCardsAndThemes[CurrentSelectionIndex].CardDetails.Count - 1;
         FindAnyObjectByType<Uicontroller>().UpdateMaxIndex(AllCardsAndThemes[CurrentSelectionIndex].CardDetails.Count);
 
         SelectedCards.Clear(); // Clear previous selected cards
@@ -104,63 +104,66 @@ public class CardController : MonoBehaviour
         CurrentSubSelectionIndex = i;
     }
 
-    public bool LoadNextEnv()
+    public void LoadNextEnv()
     {
-     
-       //     CameraFade.PitchToDark?.Invoke();
 
-        CurrentSubSelectionIndex++;
 
-        if (CurrentSubSelectionIndex > maxCurrentSubSelectionIndex)
+        if (!Uicontroller.Instance.DisableRightStick)
         {
-            CurrentSelectionIndex = FindAnyObjectByType<Uicontroller>().IncrementMainUIIndex(CurrentSelectionIndex);
-            CurrentSubSelectionIndex = 0;
-            maxCurrentSubSelectionIndex = AllCardsAndThemes[CurrentSelectionIndex].CardDetails.Count-1 ;
-            ChangeSlectedCards(CurrentSelectionIndex);
-            Quest2AssetBundleLoader.Instance.SwitchEnv(AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().GlobalIndex);
-          
+            CurrentSubSelectionIndex++;
 
-            return true;
+            if (CurrentSubSelectionIndex > maxCurrentSubSelectionIndex)
+            {
+                CurrentSelectionIndex = FindAnyObjectByType<Uicontroller>().IncrementMainUIIndex(CurrentSelectionIndex);
+                CurrentSubSelectionIndex = 0;
+                maxCurrentSubSelectionIndex = AllCardsAndThemes[CurrentSelectionIndex].CardDetails.Count - 1;
+                ChangeSlectedCards(CurrentSelectionIndex);
+                Quest2AssetBundleLoader.Instance.SwitchEnv(AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().GlobalIndex, false);
+
+                Debug.Log("This is the new Current selection and it has a Global Index of : " + AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().GlobalIndex);
+
+            }
+            else
+            {
+                Quest2AssetBundleLoader.Instance.SwitchEnv(AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().GlobalIndex, false);
+                Debug.Log("This is the new Current selection and it has a Global Index of : " + AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().GlobalIndex);
+
+            }
         }
-        else
-        {
-            Quest2AssetBundleLoader.Instance.SwitchEnv(AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().GlobalIndex);
-
-            return false;
-        }
-
-
+        
     }
 
-    public bool LoadPrevEnv()
+    public void LoadPrevEnv()
     {
-     //   CameraFade.PitchToDark?.Invoke();
 
-        CurrentSubSelectionIndex--;
-
-        if (CurrentSubSelectionIndex < 0)
-        {
-            CurrentSelectionIndex = FindAnyObjectByType<Uicontroller>().decrementMainUIIndex(CurrentSelectionIndex);
-            maxCurrentSubSelectionIndex = AllCardsAndThemes[CurrentSelectionIndex].CardDetails.Count-1;
-            CurrentSubSelectionIndex = maxCurrentSubSelectionIndex;
-            ChangeSlectedCards(CurrentSelectionIndex);
-
-             Quest2AssetBundleLoader.Instance.SwitchEnv( AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().GlobalIndex);
-
-
-            return true;
-        }
-        else
+        if (!Uicontroller.Instance.DisableRightStick)
         {
 
 
-            Quest2AssetBundleLoader.Instance.SwitchEnv(AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().GlobalIndex);
+            CurrentSubSelectionIndex--;
+
+            if (CurrentSubSelectionIndex < 0)
+            {
+                CurrentSelectionIndex = FindAnyObjectByType<Uicontroller>().decrementMainUIIndex(CurrentSelectionIndex);
+                maxCurrentSubSelectionIndex = AllCardsAndThemes[CurrentSelectionIndex].CardDetails.Count - 1;
+                CurrentSubSelectionIndex = maxCurrentSubSelectionIndex;
+                ChangeSlectedCards(CurrentSelectionIndex);
+
+                Quest2AssetBundleLoader.Instance.SwitchEnv(AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().GlobalIndex, true);
+                Debug.Log("This is the new Current selection and it has a Global Index of : " + AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().GlobalIndex);
 
 
+            }
+            else
+            {
 
-            return false;
+
+                Quest2AssetBundleLoader.Instance.SwitchEnv(AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().GlobalIndex, true);
+                Debug.Log("This is the new Current selection and it has a Global Index of : " + AllCardsAndThemes[CurrentSelectionIndex].CardDetails[CurrentSubSelectionIndex].nameText.transform.parent.GetComponent<Card>().GlobalIndex);
+
+
+            }
         }
-
         //return true;
 
     }

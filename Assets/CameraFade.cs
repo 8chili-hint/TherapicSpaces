@@ -58,7 +58,7 @@ public class CameraFade : MonoBehaviour
             
             while (timeElapsed < duration)
             {
-                canvasGroup.alpha = Mathf.Lerp(0f, 1f, timeElapsed / duration);
+              //  canvasGroup.alpha = Mathf.Lerp(0f, 1f, timeElapsed / duration);
                 timeElapsed += Time.deltaTime;
                 yield return null;
             }
@@ -69,7 +69,7 @@ public class CameraFade : MonoBehaviour
             timeElapsed = 0f;
             while (timeElapsed < duration)
             {
-                canvasGroup.alpha = Mathf.Lerp(1f, 0f, timeElapsed / duration);
+              //  canvasGroup.alpha = Mathf.Lerp(1f, 0f, timeElapsed / duration);
                 timeElapsed += Time.deltaTime;
                 yield return null;
             }
@@ -79,7 +79,7 @@ public class CameraFade : MonoBehaviour
         {
             while (timeElapsed < duration)
             {
-                canvasGroup.alpha = Mathf.Lerp(1f, 0f, timeElapsed / duration);
+              //  canvasGroup.alpha = Mathf.Lerp(1f, 0f, timeElapsed / duration);
                 timeElapsed += Time.deltaTime;
                 yield return null;
             }
