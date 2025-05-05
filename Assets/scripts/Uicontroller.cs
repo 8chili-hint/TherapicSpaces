@@ -53,8 +53,8 @@ public class Uicontroller : MonoBehaviour
         menuSelected = false;
         EnteredScene = false;
         DisableRightStick = false;
-
-        MainPanel.SetActive(true);
+        MainPanel.GetComponent<CanvasGroup>().alpha = 1;
+      //  MainPanel.SetActive(true);
         SubPanel.SetActive(false);
 
         Quest2AssetBundleLoader.Instance.UnloadEnvironments();
