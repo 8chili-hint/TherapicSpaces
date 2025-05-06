@@ -174,7 +174,7 @@ public class Quest2AssetBundleLoader : MonoBehaviour
                 }
                 if (toRemove.bundle != null)
                 {
-                    toRemove.bundle.Unload(true);
+                    toRemove.bundle.UnloadAsync(true);
                 }
             }
             else
@@ -189,7 +189,7 @@ public class Quest2AssetBundleLoader : MonoBehaviour
                 }
                 if (toRemove.bundle != null)
                 {
-                    toRemove.bundle.Unload(true);
+                    toRemove.bundle.UnloadAsync(true);
                 }
             }
            
@@ -245,7 +245,8 @@ public class Quest2AssetBundleLoader : MonoBehaviour
         }
 
         // Instantiate on main thread
-        GameObject instance = Instantiate(prefab, spawnPoint, Quaternion.identity);
+        GameObject instance = Instantiate(prefab);
+        instance.transform.position = Vector3.zero;
         if (enable) 
         {
             instance.SetActive(true);
@@ -269,6 +270,7 @@ public class Quest2AssetBundleLoader : MonoBehaviour
         foreach (var obj in Queue)
         {
             Destroy(obj.PrefabInstantialted);
+            obj.bundle?.UnloadAsync(true);
         }     
         Queue.Clear();
     }
@@ -278,7 +280,7 @@ public class Quest2AssetBundleLoader : MonoBehaviour
         UnloadEnvironments();
         foreach (var bundle in loadedBundles)
         {
-            bundle?.Unload(true);
+            bundle?.UnloadAsync(true);
         }
         loadedBundles.Clear();
     }
