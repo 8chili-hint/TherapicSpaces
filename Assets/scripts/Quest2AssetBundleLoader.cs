@@ -130,7 +130,10 @@ public class Quest2AssetBundleLoader : MonoBehaviour
         LogMessage("Queue sorted");
 
         Uicontroller.Instance.SetActiveJoystick(false);
-        CameraFade.PitchToLight?.Invoke();
+        if (CameraFade.Instance.CheckCameraAlpha()==1)
+        {
+             CameraFade.PitchToLight?.Invoke();
+        }
     }
 
     IEnumerator LoadEnvironment(int index, bool enable, bool isprev)

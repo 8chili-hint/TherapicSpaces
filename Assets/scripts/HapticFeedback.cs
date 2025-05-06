@@ -13,7 +13,12 @@ public class HapticFeedback : MonoBehaviour
     public uint channel = 0; // The haptic channel (default to 0)
 
     private InputDevice inputDevice;
+    public static HapticFeedback Instance;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
     //Get the input device
     void Start()
     {

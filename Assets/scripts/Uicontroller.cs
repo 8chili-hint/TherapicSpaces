@@ -60,7 +60,7 @@ public class Uicontroller : MonoBehaviour
         EnteredScene = false;
         MainPanel.GetComponent<CanvasGroup>().alpha = 1;
       //  MainPanel.SetActive(true);
-        SubPanel.SetActive(false);
+        SubPanel.GetComponent<CanvasGroup>().alpha = 0;
 
         Quest2AssetBundleLoader.Instance.UnloadEnvironments();
         OceanEnv.SetActive(true);
@@ -128,6 +128,7 @@ public class Uicontroller : MonoBehaviour
                 CameraFade.FadeInComplete?.Invoke();
                 
             }
+            HapticFeedback.Instance.SendHapticImpulse();
         }
         
     }
@@ -170,8 +171,10 @@ public class Uicontroller : MonoBehaviour
                
 
             }
+            HapticFeedback.Instance.SendHapticImpulse();
+
         }
-     
+
     }
 
     void HoverOnMenuItem()

@@ -36,6 +36,11 @@ public class CameraFade : MonoBehaviour
         PitchToLight += () => { StartCoroutine(FadeOutCoroutine()); };
     }
     // Public method to start the fade-in-out sequence
+
+    public float CheckCameraAlpha()
+    {
+        return canvasGroup.alpha;
+    }
     public void FadeInOut()
     {
         // Stop any existing fade coroutine

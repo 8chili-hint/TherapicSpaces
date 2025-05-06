@@ -20,8 +20,6 @@ MonoBehaviour:
     rid: 7634046156818874368
   m_OverrideGlobalSceneList: 1
   m_Scenes:
-  - m_enabled: 0
-    m_path: Assets/Scenes/MainScene.unity
   - m_enabled: 1
     m_path: Assets/Scenes/MainScene trial.unity
   m_ScriptingDefines: []
@@ -171,12 +169,6 @@ MonoBehaviour:
     - line: '|   preloadedAssets:'
     - line: '|   - {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b,
         type: 3}'
-    - line: '|   - {fileID: 11400000, guid: 6876ece2b8ed85b4fae812f2897cf26f, type:
-        2}'
-    - line: '|   - {fileID: -651118177426187820, guid: d6418079ada45e2439622b9a2465cfdb,
-        type: 2}'
-    - line: '|   - {fileID: 8417106481790683171, guid: 1dec0a5167545094bb22a99e874b1e6f,
-        type: 2}'
     - line: '|   metroInputSource: 0'
     - line: '|   wsaTransparentSwapchain: 0'
     - line: '|   m_HolographicPauseOnTrackingLoss: 1'

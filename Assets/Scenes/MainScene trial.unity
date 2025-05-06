@@ -6806,6 +6806,7 @@ GameObject:
   - component: {fileID: 650354974}
   - component: {fileID: 650354973}
   - component: {fileID: 650354978}
+  - component: {fileID: 650354979}
   m_Layer: 0
   m_Name: MainCanvas (1)
   m_TagString: Untagged
@@ -6902,9 +6903,9 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 650354972}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.19}
-  m_LocalScale: {x: 0.0016915, y: 0.0016915, z: 0.0016915}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.1899998}
+  m_LocalScale: {x: 0.0016915, y: 0.0016915001, z: 0.0016915001}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1425547011}
@@ -6913,7 +6914,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.00000079236, y: 0}
+  m_AnchoredPosition: {x: 0, y: 5.40259}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &650354978
@@ -6928,6 +6929,33 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &650354979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650354972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2d7d89889b4d94fa1f8d6fe49788e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Target: {fileID: 1948693205}
+  m_TargetOffset: {x: 0, y: 0, z: 1.8}
+  m_FollowInLocalSpace: 0
+  m_ApplyTargetInLocalSpace: 0
+  m_MovementSpeed: 6
+  m_MovementSpeedVariancePercentage: 0.25
+  m_SnapOnEnable: 1
+  m_PositionFollowMode: 1
+  m_MinDistanceAllowed: 0.8
+  m_MaxDistanceAllowed: 1.5
+  m_TimeUntilThresholdReachesMaxDistance: 3
+  m_RotationFollowMode: 1
+  m_MinAngleAllowed: 0.1
+  m_MaxAngleAllowed: 5
+  m_TimeUntilThresholdReachesMaxAngle: 3
 --- !u!1 &652457486
 GameObject:
   m_ObjectHideFlags: 0
@@ -10061,8 +10089,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16023fe2fa00d6d468c1332a03818dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
-  amplitude: 0.5
+  duration: 0.05
+  amplitude: 0.2
   hand: 5
   channel: 0
 --- !u!4 &979151661
@@ -11245,7 +11273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Mediator: {fileID: 558904277}
   m_TransformationPriority: 0
-  m_TurnSpeed: 60
+  m_TurnSpeed: 10
   m_EnableTurnLeftRight: 1
   m_EnableTurnAround: 0
   m_LeftHandTurnInput:
@@ -11290,7 +11318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Mediator: {fileID: 558904277}
   m_TransformationPriority: 0
-  m_TurnAmount: 45
+  m_TurnAmount: 10
   m_DebounceTime: 0.5
   m_EnableTurnLeftRight: 0
   m_EnableTurnAround: 0
@@ -16388,8 +16416,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 29cc256c7a52bbc49b83626b5d0a57ae, type: 3}
+  m_Resource: {fileID: 8300000, guid: 29cc256c7a52bbc49b83626b5d0a57ae, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -18137,18 +18165,6 @@ MonoBehaviour:
           m_StringArgument: '  RightRightRight'
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 979151660}
-        m_TargetAssemblyTypeName: HapticFeedback, Assembly-CSharp
-        m_MethodName: SendHapticImpulse
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: '  RightRightRight'
-          m_BoolArgument: 0
-        m_CallState: 2
   onJoystickRightRight:
     m_PersistentCalls:
       m_Calls:
@@ -18175,7 +18191,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: '  RightRightRight'
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 0
   OnBackButtonPressed:
     m_PersistentCalls:
       m_Calls:
@@ -20681,6 +20697,7 @@ GameObject:
   - component: {fileID: 2028183422}
   - component: {fileID: 2028183421}
   - component: {fileID: 2028183426}
+  - component: {fileID: 2028183427}
   m_Layer: 0
   m_Name: SelectionCanvas (1)
   m_TagString: Untagged
@@ -20777,9 +20794,9 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2028183420}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.19}
-  m_LocalScale: {x: 0.0016915, y: 0.0016915, z: 0.0016915}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.1899998}
+  m_LocalScale: {x: 0.0016915, y: 0.0016915001, z: 0.0016915001}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 336402123}
@@ -20788,7 +20805,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.00000079236, y: 0}
+  m_AnchoredPosition: {x: 0, y: 5.40259}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &2028183426
@@ -20803,6 +20820,33 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &2028183427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028183420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2d7d89889b4d94fa1f8d6fe49788e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Target: {fileID: 1948693205}
+  m_TargetOffset: {x: 0, y: 0, z: 1.8}
+  m_FollowInLocalSpace: 0
+  m_ApplyTargetInLocalSpace: 0
+  m_MovementSpeed: 6
+  m_MovementSpeedVariancePercentage: 0.25
+  m_SnapOnEnable: 1
+  m_PositionFollowMode: 1
+  m_MinDistanceAllowed: 0.8
+  m_MaxDistanceAllowed: 1.5
+  m_TimeUntilThresholdReachesMaxDistance: 3
+  m_RotationFollowMode: 1
+  m_MinAngleAllowed: 0.1
+  m_MaxAngleAllowed: 5
+  m_TimeUntilThresholdReachesMaxAngle: 3
 --- !u!1 &2036830056
 GameObject:
   m_ObjectHideFlags: 0
